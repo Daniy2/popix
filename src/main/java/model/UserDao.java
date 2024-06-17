@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static model.Utility.errorConn;
+
 public class UserDao implements UserInterface{
 
     private static final DataSource ds;
@@ -107,19 +109,7 @@ public class UserDao implements UserInterface{
         } catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException ex) {
-                throw new RuntimeException("Errore durante la chiusura delle risorse", ex);
-            }
+            errorConn(con, preparedStatement, rs);
         }
 
         return user;
@@ -127,8 +117,33 @@ public class UserDao implements UserInterface{
 
 
 
+
     @Override
     public ArrayList<UserBean> retrieveAllUsers() {
-        return null;
+        Connection con = null;
+        ArrayList<UserBean> users = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        String selectSql = "SELECT * FROM " + Table_Name;
+
+        try {
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                UserBean user = new UserBean();
+                user.setUsername(rs.getString("Username"));
+                user.setRole(Role.valueOf(rs.getString("Role")));
+                user.setEmail(rs.getString("Email"));
+                user.setPassword(rs.getString("Password"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, rs);
+        }
+        return users;
     }
 }
