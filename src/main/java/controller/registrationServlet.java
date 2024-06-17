@@ -1,8 +1,8 @@
-package model;
+package controller;
 
-import controller.Role;
-import controller.UserBean;
-import controller.UserDao;
+import model.Role;
+import model.UserBean;
+import model.UserDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

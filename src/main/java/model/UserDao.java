@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -6,6 +6,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -40,8 +41,11 @@ public class UserDao implements UserInterface{
             preparedStatement = con.prepareStatement(insertSql);
             preparedStatement.setString(1,user.getEmail());
             preparedStatement.setString(2,user.getUsername());
-            //da fare hashing
-            preparedStatement.setString(3,user.getPassword());
+
+            //Hashing password
+            String hashedpassword = Utility.hashPassword(user.getPassword());
+
+            preparedStatement.setString(3,hashedpassword);
             preparedStatement.setString(4, String.valueOf(Role.user));
 
             preparedStatement.executeUpdate();
@@ -72,8 +76,56 @@ public class UserDao implements UserInterface{
 
     @Override
     public UserBean retrieveUser(String username, String password) {
-        return null;
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        UserBean user = null;
+        String selectSql = "SELECT * FROM " + Table_Name + " WHERE Username=?";
+
+        try {
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+            preparedStatement.setString(1, username);
+
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String hashedpassword = rs.getString("Password");
+                if(Utility.checkPassword(password,hashedpassword)){
+                    user = new UserBean();
+                    user.setUsername(rs.getString("Username"));
+                    user.setRole(Role.valueOf(rs.getString("Role")));
+                    user.setEmail(rs.getString("Email"));
+                    user.setPassword(rs.getString("Password"));
+                }else {
+                    System.out.println("password sbagliata");
+                }
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException("Errore durante la chiusura delle risorse", ex);
+            }
+        }
+
+        return user;
     }
+
+
 
     @Override
     public ArrayList<UserBean> retrieveAllUsers() {
