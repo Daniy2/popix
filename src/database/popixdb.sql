@@ -37,7 +37,9 @@ CREATE TABLE Product (
     Description TEXT not null,
     Cost DECIMAL(10, 2) not null,
     Pieces_in_stock INT not null,
-    Image_src BLOB not null
+    Image_src BLOB not null,
+    Brand VARCHAR(100) not null,
+    Figure VARCHAR(100) not null
 );
 
 -- Creazione della tabella Order (order è proibita in sql, quindi si chiamerà Ord)
