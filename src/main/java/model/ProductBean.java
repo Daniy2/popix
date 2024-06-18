@@ -2,6 +2,7 @@ package model;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.sql.Blob;
 
 public class ProductBean implements Serializable {
     private String id;
@@ -11,9 +12,11 @@ public class ProductBean implements Serializable {
     private String brand;
     private String figure;
     private int quantity;
-    private InputStream image;
+    private Blob image;
+
+
     public ProductBean() {}
-    public ProductBean(String id, String name, double price, String description, String brand, int quantity, InputStream image, String figure) {
+    public ProductBean(String id, String name, double price, String description, String brand, int quantity, Blob image, String figure) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -81,11 +84,11 @@ public class ProductBean implements Serializable {
         this.quantity = quantity;
     }
 
-    public InputStream getImage() {
+    public Blob getImage() {
         return image;
     }
 
-    public void setImage(InputStream image) {
+    public void setImage(Blob image) {
         this.image = image;
     }
 

@@ -8,6 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
+
 @MultipartConfig
 @WebServlet(name = "addProductServlet", value = "/addProductServlet")
 public class addProductServlet extends HttpServlet {
@@ -47,7 +49,7 @@ public class addProductServlet extends HttpServlet {
         String brand = request.getParameter("brand");
         String figure = request.getParameter("figure");
 
-        ProductBean productBean = new ProductBean(idProduct,name,cost,description,brand,qty,image,figure);
+        ProductBean productBean = new ProductBean(idProduct,name,cost,description,brand,qty, (Blob) image,figure);
         ProductDao productDao = new ProductDao();
 
         try{

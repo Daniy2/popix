@@ -4,11 +4,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static model.Utility.errorConn;
 import static model.Utility.errorConnUpdate;
 
 public class ProductDao implements ProductInterface{
@@ -70,7 +73,38 @@ public class ProductDao implements ProductInterface{
 
     @Override
     public ProductBean retrieveProduct(String productId) {
-        return null;
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ProductBean productBean = null;
+
+        String selectSql = "SELECT * FROM "+Table_Name+" WHERE idProduct=?";
+
+        try{
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+            preparedStatement.setString(1,productId);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                productBean = new ProductBean();
+                productBean.setId(resultSet.getString("IdProduct"));
+                productBean.setName(resultSet.getString("Name"));
+                productBean.setDescription(resultSet.getString("Description"));
+                productBean.setPrice(resultSet.getDouble("Cost"));
+                productBean.setQuantity(resultSet.getInt("Pieces_in_stock"));
+                productBean.setImage(resultSet.getBlob("Image_src"));
+                productBean.setBrand(resultSet.getString("Brand"));
+                productBean.setFigure(resultSet.getString("Figure"));
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return productBean;
     }
 
     @Override
