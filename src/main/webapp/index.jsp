@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="icon" type="image/x-icon" href="images/logo_ico.ico">
+  <link rel="icon" type="image/x-icon" href="images/icon.ico">
   <title>Popix</title>
 </head>
 <body>
