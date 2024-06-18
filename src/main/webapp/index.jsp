@@ -7,5 +7,6 @@
 </head>
 <body>
 <h1>Hello</h1>
+<a href="signup.jsp">Registrati</a>
 </body>
 </html>
