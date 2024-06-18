@@ -32,7 +32,7 @@ CREATE TABLE ShippingInfo (
 
 -- Creazione della tabella Product
 CREATE TABLE Product (
-    IdProduct INT PRIMARY KEY AUTO_INCREMENT,
+    IdProduct VARCHAR(5) PRIMARY KEY,
     Name VARCHAR(100) not null,
     Description TEXT not null,
     Cost DECIMAL(10, 2) not null,
@@ -55,7 +55,7 @@ CREATE TABLE Ord (
 -- Creazione della tabella OrderDetails
 CREATE TABLE OrderDetails (
     IdOrder INT not null,
-    IdProduct INT not null,
+    IdProduct VARCHAR(5) not null,
     Quantity INT not null,
     PRIMARY KEY (IdOrder, IdProduct),
     FOREIGN KEY (IdOrder) REFERENCES Ord(IdOrder) ON DELETE CASCADE,
