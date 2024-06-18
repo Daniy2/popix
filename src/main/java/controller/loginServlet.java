@@ -27,8 +27,5 @@ public class loginServlet extends HttpServlet {
         if (userBean != null) {
             System.out.println(userBean.toString());
         }
-
-
-
     }
 }

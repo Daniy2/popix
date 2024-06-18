@@ -33,4 +33,18 @@ public class Utility {
             throw new RuntimeException("Errore durante la chiusura delle risorse", ex);
         }
     }
+
+       public static void errorConnUpdate(Connection con, PreparedStatement preparedStatement) {
+        try{
+            if(preparedStatement!=null){
+                preparedStatement.close();
+            }
+            if(con!=null){
+                con.setAutoCommit(true);
+                con.close();
+            }
+        }catch (SQLException ez){
+            throw new RuntimeException("Errore durante chiusura delle risorse",ez);
+        }
+    }
 }

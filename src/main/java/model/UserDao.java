@@ -62,17 +62,7 @@ public class UserDao implements UserInterface{
             }
             throw new RuntimeException("Errore durante transazione sql",e);
         }finally {
-            try{
-                if(preparedStatement!=null){
-                    preparedStatement.close();
-                }
-                if(con!=null){
-                    con.setAutoCommit(true);
-                    con.close();
-                }
-            }catch (SQLException ez){
-                throw new RuntimeException("Errore durante chiusura delle risorse",ez);
-            }
+            Utility.errorConnUpdate(con, preparedStatement);
         }
     }
 
