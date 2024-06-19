@@ -23,10 +23,7 @@ public class registrationServlet extends HttpServlet {
         String email = request.getParameter("mail");
 
 
-        UserBean userBean = new UserBean(username,password,email,Role.user);
-
-        System.out.println(userBean.toString());
-
+        UserBean userBean = new UserBean(username,password,email,Role.admin);
         UserDao userDao = new UserDao();
 
        try{
