@@ -47,4 +47,14 @@ public class Utility {
             throw new RuntimeException("Errore durante chiusura delle risorse",ez);
         }
     }
+    public static void Fillproduct(ResultSet resultSet, ProductBean productBean) throws SQLException {
+        productBean.setId(resultSet.getString("IdProduct"));
+        productBean.setName(resultSet.getString("Name"));
+        productBean.setDescription(resultSet.getString("Description"));
+        productBean.setPrice(resultSet.getDouble("Cost"));
+        productBean.setQuantity(resultSet.getInt("Pieces_in_stock"));
+        productBean.setImage(resultSet.getBlob("Image_src"));
+        productBean.setBrand(resultSet.getString("Brand"));
+        productBean.setFigure(resultSet.getString("Figure"));
+    }
 }

@@ -4,15 +4,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static model.Utility.errorConn;
-import static model.Utility.errorConnUpdate;
+import static model.Utility.*;
 
 public class ProductDao implements ProductInterface{
 
@@ -89,14 +87,7 @@ public class ProductDao implements ProductInterface{
 
             if(resultSet.next()){
                 productBean = new ProductBean();
-                productBean.setId(resultSet.getString("IdProduct"));
-                productBean.setName(resultSet.getString("Name"));
-                productBean.setDescription(resultSet.getString("Description"));
-                productBean.setPrice(resultSet.getDouble("Cost"));
-                productBean.setQuantity(resultSet.getInt("Pieces_in_stock"));
-                productBean.setImage(resultSet.getBlob("Image_src"));
-                productBean.setBrand(resultSet.getString("Brand"));
-                productBean.setFigure(resultSet.getString("Figure"));
+                Fillproduct(resultSet, productBean);
             }
         }catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
@@ -107,8 +98,115 @@ public class ProductDao implements ProductInterface{
         return productBean;
     }
 
+
+
     @Override
     public ArrayList<ProductBean> retrieveAllProducts() {
-        return null;
+        ArrayList<ProductBean> productBeans = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String selectSql = "SELECT * FROM "+Table_Name;
+
+        try{
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                ProductBean productBean = new ProductBean();
+                Fillproduct(resultSet, productBean);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return productBeans;
+    }
+
+    @Override
+    public ArrayList<ProductBean> retrieveAllProductsByBrand(String brand) {
+        ArrayList<ProductBean> productBeans = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String selectSql = "SELECT * FROM "+Table_Name+" WHERE Brand = ?";
+
+        try{
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+            preparedStatement.setString(1,brand);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                ProductBean productBean = new ProductBean();
+                Fillproduct(resultSet, productBean);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return productBeans;
+    }
+
+    @Override
+    public ArrayList<ProductBean> retrieveAllProductsByFigure(String figure) {
+        ArrayList<ProductBean> productBeans = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String selectSql = "SELECT * FROM "+Table_Name+" WHERE Figure = ?";
+
+        try{
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+            preparedStatement.setString(1,figure);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                ProductBean productBean = new ProductBean();
+                Fillproduct(resultSet, productBean);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return productBeans;
+    }
+
+    @Override
+    public ArrayList<ProductBean> retrieveAllProductsByPrice() {
+        ArrayList<ProductBean> productBeans = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String selectSql = "SELECT * FROM "+Table_Name+" ORDER BY Cost";
+
+        try{
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                ProductBean productBean = new ProductBean();
+                Fillproduct(resultSet, productBean);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return productBeans;
     }
 }
