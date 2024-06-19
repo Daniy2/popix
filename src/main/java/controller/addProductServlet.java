@@ -7,8 +7,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 
 @MultipartConfig
 @WebServlet(name = "addProductServlet", value = "/addProductServlet")
@@ -38,18 +38,24 @@ public class addProductServlet extends HttpServlet {
         //String price =request.getParameter("price").trim();
         double cost = Double.parseDouble(request.getParameter("price"));
         int qty = Integer.parseInt(request.getParameter("qty"));
-        InputStream image=null;
-        for(Part part : request.getParts()){
-            String file = part.getSubmittedFileName();
-            if(file!=null && !file.isEmpty()){
-                image = part.getInputStream();
+        Blob image = null;
+        try {
+            for (Part part : request.getParts()) {
+                String file = part.getSubmittedFileName();
+                if (file != null && !file.isEmpty()) {
+                    // Read the input stream and convert it to a Blob
+                    byte[] bytes = part.getInputStream().readAllBytes();
+                    image = new javax.sql.rowset.serial.SerialBlob(bytes);
+                    break; // Assuming only one image file needs to be processed
+                }
             }
-
+        } catch (SQLException e) {
+            throw new ServletException("Error processing image file", e);
         }
         String brand = request.getParameter("brand");
         String figure = request.getParameter("figure");
 
-        ProductBean productBean = new ProductBean(idProduct,name,cost,description,brand,qty, (Blob) image,figure);
+        ProductBean productBean = new ProductBean(idProduct,name,cost,description,brand,qty, image,figure);
         ProductDao productDao = new ProductDao();
 
         try{

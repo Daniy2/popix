@@ -48,7 +48,7 @@ public class UserDao implements UserInterface{
             String hashedpassword = Utility.hashPassword(user.getPassword());
 
             preparedStatement.setString(3,hashedpassword);
-            preparedStatement.setString(4, String.valueOf(Role.user));
+            preparedStatement.setString(4, String.valueOf(user.getRole()));
 
             preparedStatement.executeUpdate();
             con.commit();
