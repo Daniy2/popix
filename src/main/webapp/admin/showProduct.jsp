@@ -9,7 +9,7 @@
 <%-- L'immagine viene visualizzata qui --%>
 <%
     // Supponendo che l'ID del prodotto sia ottenuto da qualche parte
-    String productId = "956"; // Sostituisci con l'ID del prodotto dinamicamente ottenuto
+    String productId = "453"; // Sostituisci con l'ID del prodotto dinamicamente ottenuto
 %>
 <img src="<%= request.getContextPath() %>/showProductServlet?id=<%= productId %>" alt="Immagine Prodotto" width="200" height="200">
 </body>

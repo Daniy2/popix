@@ -4,7 +4,7 @@
     <title>Add Product</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/addProductServlet" method="post" enctype="multipart/form-data">
+    <form action="${pageContext.request.contextPath}/addProductServlet" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
         <label for="idProduct">Insert id</label>
         <input type="text" name="idProduct" id="idProduct"><br>
         <label for="name">Insert name</label>

@@ -30,8 +30,7 @@ public class addProductServlet extends HttpServlet {
 //                request.getParameter("brand")+
 //                request.getParameter("figure")+
 //                request.getParameter("image_src"));
-
-
+        request.setCharacterEncoding("UTF-8");
         String idProduct = request.getParameter("idProduct");
         String name = request.getParameter("name");
         String description = request.getParameter("description");
