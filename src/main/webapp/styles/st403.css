@@ -28,7 +28,7 @@ body {
   .forbidden-403 {
     position: relative;
     height: 200px;
-    background: url('/images/403.png') no-repeat center;
+    background: url('../images/403.png') no-repeat center;
     background-size: cover;
   }
   

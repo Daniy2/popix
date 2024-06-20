@@ -28,7 +28,7 @@ body {
   .una-401 {
     position: relative;
     height: 200px;
-    background: url('/images/401.png') no-repeat center;
+    background: url('../images/401.png') no-repeat center;
     background-size: cover;
   }
   
