@@ -117,6 +117,7 @@ public class ProductDao implements ProductInterface{
             while(resultSet.next()){
                 ProductBean productBean = new ProductBean();
                 Fillproduct(resultSet, productBean);
+                productBeans.add(productBean);
             }
         }catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
@@ -145,6 +146,7 @@ public class ProductDao implements ProductInterface{
             while(resultSet.next()){
                 ProductBean productBean = new ProductBean();
                 Fillproduct(resultSet, productBean);
+                productBeans.add(productBean);
             }
         }catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
@@ -173,6 +175,7 @@ public class ProductDao implements ProductInterface{
             while(resultSet.next()){
                 ProductBean productBean = new ProductBean();
                 Fillproduct(resultSet, productBean);
+                productBeans.add(productBean);
             }
         }catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
@@ -200,6 +203,7 @@ public class ProductDao implements ProductInterface{
             while(resultSet.next()){
                 ProductBean productBean = new ProductBean();
                 Fillproduct(resultSet, productBean);
+                productBeans.add(productBean);
             }
         }catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
