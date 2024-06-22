@@ -14,22 +14,7 @@
 <body>
 
 <!-- Header start -->
-<header>
-    <img src="${pageContext.request.contextPath}/images/logo-noborderico.png" alt="Logo" class="header-photo">
-    <input type="checkbox" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
-    <a href="#" class="logo">Pop<span>!</span>x</a>
-    <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Prodotti</a>
-        <a href="#">Saldi</a>
-    </nav>
-    <div class="icons">
-        <a href="#" class="fas fa-heart"></a>
-        <a href="#" class="fas fa-shopping-cart"></a>
-        <a href="#" class="fas fa-user"></a>
-    </div>
-</header>
+<%@include file="fragments/header.jsp"%>
 <!-- Header end -->
 
 <!-- Home start -->
