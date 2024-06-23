@@ -1,4 +1,4 @@
-
+<%@ page import="model.ProductBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -56,10 +56,18 @@
 <section class="products" id="products">
     <h1 class="heading">Ultimi<span> arrivi</span></h1>
     <div class="box-container">
+        <!-- Product 1 -->
         <div class="box product1">
             <span class="discount">-10%</span>
             <div class="image">
-                <img src="#" alt="Product image">
+                <%
+                    ProductBean productBean1 = (ProductBean) request.getAttribute("product1");
+                    if (productBean1 == null) {
+                        request.getRequestDispatcher("/getProductServlet?id=956&suffix=1").include(request, response);
+                        productBean1 = (ProductBean) request.getAttribute("product1");
+                    }
+                %>
+                <img src="<%= request.getContextPath() %>/getPictureServlet?id=956" alt="Product Image">
                 <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
@@ -67,14 +75,23 @@
                 </div>
             </div>
             <div class="content">
-                <h3>POP! TRUNKS & GILL</h3>
-                <h4>DRAGON BALL</h4>
-                <div class="price">€13.5 <span>€15</span></div>
+                <h3><%= productBean1.getName() %></h3>
+                <h4><%= productBean1.getBrand() %></h4>
+                <div class="price"><%= productBean1.getPrice() %> <span>€14.5</span></div>
             </div>
         </div>
+
+        <!-- Product 2 -->
         <div class="box product2">
             <div class="image">
-                <img src="#" alt="Product image">
+                <%
+                    ProductBean productBean2 = (ProductBean) request.getAttribute("product2");
+                    if (productBean2 == null) {
+                        request.getRequestDispatcher("/getProductServlet?id=98&suffix=2").include(request, response);
+                        productBean2 = (ProductBean) request.getAttribute("product2");
+                    }
+                %>
+                <img src="<%= request.getContextPath() %>/getPictureServlet?id=98" alt="Product Image">
                 <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
@@ -82,14 +99,23 @@
                 </div>
             </div>
             <div class="content">
-                <h3>POP! DARTH MAUL (RETRO)</h3>
-                <h4>STAR WARS</h4>
-                <div class="price">€15</div>
+                <h3><%= productBean2.getName() %></h3>
+                <h4><%= productBean2.getBrand() %></h4>
+                <div class="price"><%= productBean2.getPrice() %></div>
             </div>
         </div>
+
+        <!-- Product 3 -->
         <div class="box product3">
             <div class="image">
-                <img src="#" alt="Product image">
+                <%
+                    ProductBean productBean3 = (ProductBean) request.getAttribute("product3");
+                    if (productBean3 == null) {
+                        request.getRequestDispatcher("/getProductServlet?id=10&suffix=3").include(request, response);
+                        productBean3 = (ProductBean) request.getAttribute("product3");
+                    }
+                %>
+                <img src="<%= request.getContextPath() %>/getPictureServlet?id=10" alt="Product Image">
                 <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
@@ -97,9 +123,9 @@
                 </div>
             </div>
             <div class="content">
-                <h3>POP! SHREK WITH BALLOON</h3>
-                <h4>SHREK</h4>
-                <div class="price">€13.99</div>
+                <h3><%= productBean3.getName() %></h3>
+                <h4><%= productBean3.getBrand() %></h4>
+                <div class="price"><%= productBean3.getPrice() %></div>
             </div>
         </div>
     </div>
