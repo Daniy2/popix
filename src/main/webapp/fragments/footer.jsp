@@ -7,6 +7,7 @@
 
 
 <!-- Footer start -->
+<!-- Footer end -->
 <section class="footer">
     <div class="box-container">
         <div class="box">
@@ -32,7 +33,6 @@
         © 2024 Copyright: All rights reserved
     </div>
 </section>
-<!-- Footer end -->
 
 
 </body>

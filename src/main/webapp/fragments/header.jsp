@@ -10,8 +10,8 @@
     <label for="toggler" class="fas fa-bars"></label>
     <a href="#" class="logo">Pop<span>!</span>x</a>
     <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Prodotti</a>
+        <a href="home.jsp">Home</a>
+        <a href="products.jsp">Prodotti</a>
         <a href="#">Saldi</a>
     </nav>
     <div class="icons">

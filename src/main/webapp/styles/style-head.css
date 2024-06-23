@@ -7,12 +7,6 @@
     background: #e7dcff;
 }
 
-.header-photo {
-    width: 6rem; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-left: -2rem; /* Adjust margin for spacing */
-}
-
 .heading span {
     color: #9966ff;
     font-weight: bold;
@@ -45,6 +39,13 @@ header {
     justify-content: space-between;
     z-index: 1000;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    height: 8rem; /* Adjust height as needed */
+}
+
+.header-photo {
+    width: 6rem; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: -2rem; /* Adjust margin for spacing */
 }
 
 header .logo {
@@ -53,6 +54,12 @@ header .logo {
     font-weight: bolder;
     text-decoration: none;
     margin-left: -1rem;
+    display: flex;
+    align-items: center; /* Align logo vertically */
+}
+
+header .logo span {
+    color: #ffeb99;
 }
 
 header .navbar {
@@ -67,13 +74,16 @@ header .navbar a {
     color: #e7dcff;
     display: flex;
     align-items: center; /* Center the text within each anchor tag */
-    height: 100%; /* Ensure anchor tags take the full height of the navbar */
 }
 
 header .navbar a:hover {
     color: #ffeb99;
 }
 
+header .icons {
+    display: flex;
+    align-items: center; /* Align icons vertically */
+}
 
 header .icons a {
     font-size: 2.5rem;
@@ -92,16 +102,11 @@ header #toggler {
 
 header .fa-bars {
     font-size: 3rem;
-    color: #333;
+    color: #ffffff;
     border-radius: .5rem;
     padding: .5rem 1.5rem;
     cursor: pointer;
-    border: 1rem solid rgba(0, 0, 0, .3);
     display: none;
-}
-
-header .logo span {
-    color: #ffeb99;
 }
 
 @media (max-width: 991px) {
@@ -138,6 +143,8 @@ header .logo span {
     }
 
     header #toggler:checked ~ .navbar {
+        display: flex; /* Show navbar when toggler is checked */
+        flex-direction: column;
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
