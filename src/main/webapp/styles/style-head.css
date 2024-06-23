@@ -103,3 +103,67 @@ header .fa-bars {
 header .logo span {
     color: #ffeb99;
 }
+
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    header {
+        padding: 2rem;
+    }
+
+    section {
+        padding: 2rem;
+    }
+
+    .home {
+        background-position: left;
+    }
+}
+
+@media (max-width: 768px) {
+    header .fa-bars {
+        display: block;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #eee;
+        border-top: .1rem solid rgba(0, 0, 0, .1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    header #toggler:checked ~ .navbar {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    header .navbar {
+        justify-content: center; /* Center navbar items */
+    }
+
+    header .navbar a {
+        margin: 1rem; /* Adjust spacing */
+        padding: 1rem; /* Adjust padding */
+        background: #9966ff;
+        border: .1rem solid rgba(0, 0, 0, .1);
+        display: block;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 55%;
+    }
+
+    header {
+        padding: 2rem;
+    }
+
+    .heading {
+        font-size: 3rem;
+    }
+}
