@@ -17,7 +17,7 @@
     <div class="box-area row border rounded-5 p-4 bg-white shadow" style="max-width: 500px;">
         <h2 class="text-center mb-4">Accedi!</h2>
 
-        <form >
+        <form id="login-form" method="post" action="${pageContext.request.contextPath}/signIn">
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label>
@@ -27,7 +27,7 @@
 
             <div data-mdb-input-init class="form-outline mb-4">
                 <label>
-                    <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Password" name="password">
+                    <input type="password" class="form-control form-control-lg bg-light fs-6 " placeholder="Password" name="password">
                 </label>
             </div>
 

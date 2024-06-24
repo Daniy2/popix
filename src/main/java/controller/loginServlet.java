@@ -24,8 +24,9 @@ public class loginServlet extends HttpServlet {
 
         UserBean userBean = userDao.retrieveUser(username, password);
 
-        if (userBean != null) {
-            System.out.println(userBean.toString());
+        if(userBean != null) {
+            request.getSession().setAttribute("user", userBean);
+            response.sendRedirect("home.jsp");
         }
     }
 }

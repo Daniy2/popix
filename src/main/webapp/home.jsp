@@ -1,4 +1,5 @@
 <%@ page import="model.ProductBean" %>
+<%@ page import="model.UserBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,7 +17,6 @@
 <!-- Header start -->
 <%@include file="fragments/header.jsp"%>
 <!-- Header end -->
-
 <!-- Home start -->
 <section class="home" id="home">
     <div class="content">
@@ -69,7 +69,6 @@
                 %>
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=956" alt="Product Image">
                 <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
                     <a href="#" class="fas fa-share"></a>
                 </div>
@@ -93,7 +92,6 @@
                 %>
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=98" alt="Product Image">
                 <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
                     <a href="#" class="fas fa-share"></a>
                 </div>
@@ -117,7 +115,7 @@
                 %>
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=10" alt="Product Image">
                 <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
+
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
                     <a href="#" class="fas fa-share"></a>
                 </div>
