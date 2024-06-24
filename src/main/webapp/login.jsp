@@ -31,16 +31,6 @@
                 </label>
             </div>
 
-            <div class="input-group mb-4 d-flex justify-content-between">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="formCheck">
-                    <label for="formCheck" class="form-check-label text-secondary"><small>Ricordami</small></label>
-                </div>
-                <p class="forgot">
-                    <small><a href="#" class="fw-bold text-body text-decoration-none custom-link"><u>Password dimenticata?</u></a></small>
-                </p>
-            </div>
-
             <div class="input-group mb-4">
                 <button type="submit" class="btn btn-lg w-100 fs-6" style="background-color: #9966ff; color: white;">Login</button>
             </div>
