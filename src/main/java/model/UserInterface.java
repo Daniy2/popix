@@ -6,4 +6,6 @@ public interface UserInterface {
     void doSave(UserBean user);
     UserBean retrieveUser(String username, String password);
     ArrayList<UserBean> retrieveAllUsers();
+    boolean retrieveEmail(String email);
+
 }

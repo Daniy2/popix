@@ -136,4 +136,23 @@ public class UserDao implements UserInterface{
         }
         return users;
     }
+
+    @Override
+    public boolean retrieveEmail(String email) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String selectSql = "SELECT * FROM "+Table_Name+" WHERE Email = ?";
+        try{
+            conn = ds.getConnection();
+            preparedStatement = conn.prepareStatement(selectSql);
+            preparedStatement.setString(1,email);
+            resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(conn, preparedStatement, resultSet);
+        }
+    }
 }

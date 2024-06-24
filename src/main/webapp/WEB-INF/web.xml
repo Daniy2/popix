@@ -28,5 +28,12 @@
         <error-code>500</error-code>
         <location>/error-pages/500.jsp</location>
     </error-page>
-
+    <servlet>
+        <servlet-name>registrationServlet</servlet-name>
+        <servlet-class>controller.registrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registrationServlet</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
 </web-app>
