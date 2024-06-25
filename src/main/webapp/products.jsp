@@ -1,3 +1,7 @@
+<%@ page import="model.ProductBean" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,6 +19,51 @@
 <!-- Header start -->
 <%@include file="fragments/header.jsp"%>
 <!-- Header end -->
+<%
+    ArrayList<ProductBean> productBeans = null;
+    try {
+        productBeans = (ArrayList<ProductBean>) request.getAttribute("products");
+    } catch (ClassCastException e) {
+        //System.out.println("Error: products attribute is not of type ArrayList<ProductBean>");
+        e.printStackTrace();
+    }
+
+    if (productBeans == null) {
+        //System.out.println("Products attribute is null, forwarding to getProductsServlet");
+        request.getRequestDispatcher("/getProductsServlet").forward(request, response);
+        return;
+    }
+
+    if (!productBeans.isEmpty()) {
+        /*Iterator<ProductBean> iterator = productBeans.iterator();
+        while (iterator.hasNext()) {
+            ProductBean productBean = iterator.next();
+            System.out.println("Product: " + productBean);
+        }*/
+    } else {
+        System.out.println("No products found.");
+    }
+
+    int totalProducts = productBeans.size();
+    int productsPerPage = 6;
+    int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
+    int currentPage = 1;
+
+    String pageParam = request.getParameter("page");
+    if (pageParam != null && !pageParam.isEmpty()) {
+        try {
+            currentPage = Integer.parseInt(pageParam);
+        } catch (NumberFormatException e) {
+            currentPage = 1;
+        }
+    }
+
+    int start = (currentPage - 1) * productsPerPage;
+    int end = Math.min(start + productsPerPage, totalProducts);
+
+    List<ProductBean> productsForCurrentPage = productBeans.subList(start, end);
+
+%>
 
 
 <!-- Home start -->
@@ -55,99 +104,26 @@
 
     <section class="products" id="products">
         <div class="box-container">
-            <div class="box product1">
+            <%
+                for (ProductBean product : productsForCurrentPage) {
+            %>
+            <div class="box">
                 <div class="image">
-                    <img src="#" alt="Product image">
+                    <img src="<%= request.getContextPath() %>/getPictureServlet?id=<%= product.getId()%>" alt="Product image">
                     <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
                         <a href="#" class="cart-btn">Aggiungi al carrello</a>
                         <a href="#" class="fas fa-share"></a>
                     </div>
                 </div>
                 <div class="content">
-                    <h3>Product 1</h3>
-                    <h4>description</h4>
-                    <div class="price">€13.5</div>
+                    <h3><%= product.getName() %></h3>
+                    <h4><%= product.getBrand() %></h4>
+                    <div class="price">€<%= product.getPrice() %></div>
                 </div>
             </div>
-            <div class="box product2">
-                <div class="image">
-                    <img src="#" alt="Product image">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Product 2</h3>
-                    <h4>description</h4>
-                    <div class="price">€15</div>
-                </div>
-            </div>
-            <div class="box product3">
-                <div class="image">
-                    <img src="#" alt="Product image">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Product 3</h3>
-                    <h4>description</h4>
-                    <div class="price">€13.99</div>
-                </div>
-            </div>
-
-            <div class="box product4">
-                <div class="image">
-                    <img src="#" alt="Product image">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Product 4</h3>
-                    <h4>description</h4>
-                    <div class="price">€13.99</div>
-                </div>
-            </div>
-
-            <div class="box product5">
-                <div class="image">
-                    <img src="#" alt="Product image">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Product 5</h3>
-                    <h4>description</h4>
-                    <div class="price">€13.99</div>
-                </div>
-            </div>
-
-            <div class="box product6">
-                <div class="image">
-                    <img src="#" alt="Product image">
-                    <div class="icons">
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                        <a href="#" class="fas fa-share"></a>
-                    </div>
-                </div>
-                <div class="content">
-                    <h3>Product 6</h3>
-                    <h4>description</h4>
-                    <div class="price">€13.99</div>
-                </div>
-            </div>
+            <%
+                }
+            %>
         </div>
     </section>
 </div>
@@ -155,13 +131,21 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Precedente</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
-        <li class="page-item"><a class="page-link" href="#">Successivo</a></li>
+        <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
+            <a class="page-link" href="?page=<%= currentPage - 1 %>">Precedente</a>
+        </li>
+        <%
+            for (int i = 1; i <= totalPages; i++) {
+        %>
+        <li class="page-item <%= currentPage == i ? "active" : "" %>">
+            <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+        </li>
+        <%
+            }
+        %>
+        <li class="page-item <%= currentPage == totalPages ? "disabled" : "" %>">
+            <a class="page-link" href="?page=<%= currentPage + 1 %>">Successivo</a>
+        </li>
     </ul>
 </nav>
 <%@include file="fragments/footer.jsp"%>

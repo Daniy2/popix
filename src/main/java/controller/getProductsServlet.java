@@ -17,7 +17,7 @@ public class getProductsServlet extends HttpServlet {
         ProductDao productDao = new ProductDao();
         ArrayList<ProductBean> products = productDao.retrieveAllProducts();
         request.setAttribute("products", products);
-        getServletContext().getRequestDispatcher("/admin/showProducts.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/products.jsp").forward(request, response);
     }
 
     @Override
