@@ -77,7 +77,6 @@
 <div class="container">
     <aside class="sidebar">
         <form action="#">
-            <input type="text" placeholder="Search for products" required>
             <select name="category">
                 <option value="">Brand</option>
                 <option value="onepiece">One piece</option>
