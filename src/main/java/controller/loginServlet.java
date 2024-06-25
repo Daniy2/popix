@@ -1,5 +1,6 @@
 package controller;
 
+import model.Role;
 import model.UserBean;
 import model.UserDao;
 
@@ -21,12 +22,25 @@ public class loginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         UserDao userDao = new UserDao();
-
         UserBean userBean = userDao.retrieveUser(username, password);
 
-        if(userBean != null) {
-            request.getSession().setAttribute("user", userBean);
-            response.sendRedirect("home.jsp");
+
+        if (userBean == null) {
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("Nome utente o password sbagliata.");
+        } else {
+            // Creazione della sessione
+            HttpSession session = request.getSession();
+            session.setAttribute("user", userBean);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+
+            if (userBean.getRole().equals(Role.user)) {
+                response.getWriter().write("user");
+            } else if (userBean.getRole().equals(Role.admin)) {
+                response.getWriter().write("admin");
+            }
         }
     }
 }

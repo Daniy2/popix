@@ -1,6 +1,7 @@
 <%@ page import="model.ProductBean" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="model.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,6 +18,11 @@
 
 <%@include file="/fragments/header.jsp" %>
 <%
+
+    if(userBean.getRole().equals(Role.user) ){
+        response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        return;
+    }
     ArrayList<ProductBean> productBeans = null;
     try {
         productBeans = (ArrayList<ProductBean>) request.getAttribute("products");

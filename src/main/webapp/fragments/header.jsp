@@ -1,4 +1,5 @@
 <%@ page import="model.UserBean" %>
+<%@ page import="model.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,12 +23,17 @@
     </nav>
     <div class="icons">
         <a href="#" class="fas fa-shopping-cart"></a>
-        <% if (isLoggedIn) { %>
+        <% if (isLoggedIn && userBean.getRole().equals(Role.user)) { %>
         <a href="#" class="fas fa-user"> <span><%= userBean.getUsername() %></span></a>
         <a href="${pageContext.request.contextPath}/logout?l-out=yes" class="fas fa-sign-out-alt"></a>
-        <% } else { %>
+        <% } else if(isLoggedIn && userBean.getRole().equals(Role.admin)) { %>
+        <a href="${pageContext.request.contextPath}/admin/admin.jsp" class="fas fa-user"> <span><%= userBean.getUsername() %></span></a>
+        <a href="${pageContext.request.contextPath}/logout?l-out=yes" class="fas fa-sign-out-alt"></a>
+        <% }else  { %>
         <a href="${pageContext.request.contextPath}/login.jsp" class="fas fa-sign-in-alt"></a>
         <% } %>
+
+
     </div>
 </header>
 
