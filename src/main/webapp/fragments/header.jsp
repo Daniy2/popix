@@ -16,8 +16,8 @@
     <label for="toggler" class="fas fa-bars"></label>
     <a href="#" class="logo">Pop<span>!</span>x</a>
     <nav class="navbar">
-        <a href="home.jsp">Home</a>
-        <a href="products.jsp">Prodotti</a>
+        <a href="${pageContext.request.contextPath}/home.jsp">Home</a>
+        <a href="${pageContext.request.contextPath}/products.jsp">Prodotti</a>
         <a href="#">Saldi</a>
     </nav>
     <div class="icons">
@@ -26,7 +26,7 @@
         <a href="#" class="fas fa-user"> <span><%= userBean.getUsername() %></span></a>
         <a href="${pageContext.request.contextPath}/logout?l-out=yes" class="fas fa-sign-out-alt"></a>
         <% } else { %>
-        <a href="login.jsp" class="fas fa-sign-in-alt"></a>
+        <a href="${pageContext.request.contextPath}/login.jsp" class="fas fa-sign-in-alt"></a>
         <% } %>
     </div>
 </header>

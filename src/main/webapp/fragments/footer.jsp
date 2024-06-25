@@ -33,7 +33,5 @@
         © 2024 Copyright: All rights reserved
     </div>
 </section>
-
-
 </body>
 </html>
