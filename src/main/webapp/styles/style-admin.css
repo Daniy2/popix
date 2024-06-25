@@ -134,65 +134,90 @@ header .fa-bars {
 }
 
 .container {
-    max-width: 500px;
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    margin-top: 8rem; /* Ensure content starts below the header */
+    border-radius: 20px; /* Add border radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for a 3D effect */
 }
 
-.container h2 {
+h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333333;
+    font-weight: bold;
 }
 
-.rounded-form {
-    display: flex;
-    flex-direction: column;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
+table, th, td {
+    border: 1px solid #ddd;
 }
 
-label {
-    font-size: 1.2rem;
-    color: #9966ff;
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
+th, td {
     padding: 10px;
-    font-size: 1.4rem;
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    transition: border-color 0.3s ease-in-out;
+    text-align: left;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-    outline: none;
-    border-color: #9966ff;
+th {
+    background-color: #f2f2f2;
 }
 
 button {
-    padding: 12px 20px;
-    font-size: 1.4rem;
-    color: #ffffff;
+    padding: 5px 10px;
     background-color: #9966ff;
+    color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: #7a49a6;
+    background-color: #333;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem; /* Adjust spacing from the content above if needed */
+}
+
+/* Removing underline from page links */
+.pagination .page-link {
+    text-decoration: none;
+}
+
+/* Optional: Style for active page */
+.pagination .page-item.active .page-link {
+    background-color: #9966ff;
+    border-color: #9966ff;
+    color: #fff;
+}
+
+.btn-add-product {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0; /* Spacing from the container */
+    padding: 5px 20px;
+    background-color: #9966ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+
+.btn-add-product:hover {
+    background-color: #333;
 }
 
 @media (max-width: 991px) {
