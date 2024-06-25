@@ -17,17 +17,8 @@ html {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
     background-color: #f4f4f4;
     padding-top: 8rem; /* Adjust padding to account for fixed header */
-}
-
-section {
-    padding: 2rem 9%;
 }
 
 .heading {
@@ -37,6 +28,12 @@ section {
     padding: 1rem;
     margin: 2rem 0;
     background: #e7dcff;
+}
+
+.header-photo {
+    width: 6rem; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: -2rem; /* Adjust margin for spacing */
 }
 
 .heading span {
@@ -59,7 +56,6 @@ section {
     background: #9966ff;
 }
 
-/* Header Styles */
 header {
     position: fixed;
     top: 0;
@@ -72,13 +68,6 @@ header {
     justify-content: space-between;
     z-index: 1000;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-    height: 8rem; /* Adjust height as needed */
-}
-
-.header-photo {
-    width: 6rem; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-left: -2rem; /* Adjust margin for spacing */
 }
 
 header .logo {
@@ -87,12 +76,6 @@ header .logo {
     font-weight: bolder;
     text-decoration: none;
     margin-left: -1rem;
-    display: flex;
-    align-items: center; /* Align logo vertically */
-}
-
-header .logo span {
-    color: #ffeb99;
 }
 
 header .navbar {
@@ -114,10 +97,6 @@ header .navbar a:hover {
     color: #ffeb99;
 }
 
-header .icons {
-    display: flex;
-    align-items: center; /* Align icons vertically */
-}
 
 header .icons a {
     font-size: 2.5rem;
@@ -143,6 +122,10 @@ header .fa-bars {
     display: none;
 }
 
+header .logo span {
+    color: #ffeb99;
+}
+
 .product-container {
     display: flex;
     flex-wrap: wrap;
@@ -150,42 +133,62 @@ header .fa-bars {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-    max-width: 1000px; /* Increase max-width */
+    max-width: 900px;
     width: 100%;
-    margin: 20px;
-    padding: 20px; /* Add padding for better spacing */
-}
-
-.product-details {
-    flex: 2 1 600px; /* Increase initial width */
+    margin: 20px auto; /* Center the container */
     padding: 20px;
 }
+
+.product-image {
+    flex: 1;
+    text-align: center;
+    background-color: #eee;
+}
+
 .product-image img {
     max-width: 100%;
     height: auto;
 }
 
 .product-details {
-    flex: 2 1 400px;
+    flex: 1;
     padding: 20px;
 }
 
 .product-name {
-    font-size: 24px;
+    font-size: 2.4rem;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
-.product-description {
-    font-size: 16px;
-    margin-bottom: 20px;
+.product-brand {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #666;
 }
 
 .product-price {
-    font-size: 30px;
+    font-size: 3rem;
     margin-bottom: 20px;
     color: #9966ff;
     font-weight: bold;
+}
+
+.quantity-selector {
+    margin-bottom: 20px;
+}
+
+.quantity-selector .form-label {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.quantity-selector .form-control {
+    width: 100px;
+    padding: 10px;
+    font-size: 1.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .add-to-cart {
@@ -193,30 +196,62 @@ header .fa-bars {
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1.6rem;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
 .add-to-cart:hover {
-    color: white;
     background-color: #333;
 }
 
-.quantity-selector {
-    margin-top: 10px;
+/*
+.footer {
+    color: #333;
+    padding: 2rem 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
-.quantity-selector .form-label {
-    font-size: 16px;
-    margin-bottom: 5px;
+.footer .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.quantity-selector .form-control {
-    max-width: 100px;
+.footer .box-container .box {
+    flex: 1 1 25rem;
+    max-width: 100%;
+    padding: 0 1rem;
+    text-align: center;
 }
 
+.footer .box-container .box h3 {
+    font-size: 2.5rem;
+    padding: 1rem 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.footer .box-container .box a {
+    display: block;
+    color: #666;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    transition: color 0.3s;
+}
+
+.footer .box-container .box a:hover {
+    color: #9966ff;
+    text-decoration: underline;
+}*/
+
+
+/* Responsive Styles */
 @media (max-width: 991px) {
     html {
         font-size: 55%;
@@ -229,28 +264,29 @@ header .fa-bars {
     section {
         padding: 2rem;
     }
+
+    .container {
+        padding: 15px;
+    }
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
+
     header .fa-bars {
         display: block;
     }
 
     header .navbar {
         position: absolute;
-        top: 8rem; /* Adjust top value to be below the header */
+        top: 100%;
         left: 0;
         right: 0;
         background: #eee;
         border-top: .1rem solid rgba(0, 0, 0, .1);
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        display: none; /* Hide by default */
     }
 
     header #toggler:checked ~ .navbar {
-        display: flex; /* Show navbar when toggler is checked */
-        flex-direction: column; /* Stack links vertically */
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
@@ -264,36 +300,15 @@ header .fa-bars {
         background: #9966ff;
         border: .1rem solid rgba(0, 0, 0, .1);
         display: block;
-        text-align: center; /* Center the text */
     }
 
     .container {
-        flex-wrap: wrap; /* Allow sidebar and products to wrap */
-    }
-
-    .sidebar {
-        flex: 1 1 100%; /* Full width on small screens */
-        margin-bottom: 2rem; /* Add some space between the sidebar and products */
-    }
-
-    .products {
-        flex: 1 1 100%; /* Full width on small screens */
-    }
-
-    .products .box-container {
-        justify-content: center; /* Center product boxes on small screens */
-    }
-
-    .product-container {
-        flex-direction: column;
-    }
-
-    .product-image, .product-details {
-        flex: 1 1 100%;
+        margin-top: 4rem; /* Adjust margin for smaller screens */
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 576px) {
+
     html {
         font-size: 55%;
     }
@@ -304,5 +319,18 @@ header .fa-bars {
 
     .heading {
         font-size: 3rem;
+    }
+
+    .container {
+        margin-top: 3rem; /* Further adjust margin for very small screens */
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Decrease heading font size */
+    }
+
+    .table th,
+    .table td {
+        padding: .5rem; /* Decrease table cell padding */
     }
 }
