@@ -1,16 +1,20 @@
-<!DOCTYPE html>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/x-icon" href="/images/logo-noborderico.png">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/logo-noborderico.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/styles-mod.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles-mod.css">
     <script src="https://kit.fontawesome.com/892069e9ac.js" crossorigin="anonymous"></script>
     <title>Admin- Modifica</title>
 </head>
 <body>
 
+<%@include file="../fragments/header.jsp"%>
+<!--Header
 <header>
     <img src="/images/logo-noborderico.png" alt="Logo" class="header-photo">
     <input type="checkbox" id="toggler">
@@ -27,6 +31,10 @@
         <a href="#" class="fas fa-user"></a>
     </div>
 </header>
+
+-->
+
+
 
 <h2>Modifica prodotto</h2>
 <form class="form-horizontal">
@@ -45,10 +53,7 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group">
-            <label for="iva">IVA</label>
-            <input type="text" id="iva" name="iva" required>
-        </div>
+
         <div class="form-group">
             <label for="brand">Brand</label>
             <input type="text" id="brand" name="brand" required>
@@ -62,10 +67,6 @@
         <div class="form-group">
             <label for="quantita">Quantità</label>
             <input type="number" id="quantita" name="quantita" required>
-        </div>
-        <div class="form-group">
-            <label for="data">Data</label>
-            <input type="date" id="data" name="data" required>
         </div>
         <div class="form-group">
             <label for="immagine">Immagine</label>
@@ -83,7 +84,7 @@
     </div>
 </form>
 
-
+<!--
 <section class="footer">
     <div class="box-container">
         <div class="box">
@@ -109,6 +110,10 @@
         © 2024 Copyright: All rights reserved
     </div>
 </section>
+
+-->
+
+<%@include file="../fragments/footer.jsp"%>
 
 </body>
 </html>

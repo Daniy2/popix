@@ -1,35 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/x-icon" href="/images/logo-noborderico.png">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/logo-noborderico.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/styles-pers.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles-pers.css">
     <script src="https://kit.fontawesome.com/892069e9ac.js" crossorigin="anonymous"></script>
     <title>Panoramica</title>
 </head>
 <body>
-
-<header>
-    <img src="/images/logo-noborderico.png" alt="Logo" class="header-photo">
-    <input type="checkbox" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
-    <a href="#" class="logo">Pop<span>!</span>x</a>
-    <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Prodotti</a>
-        <a href="#">Saldi</a>
-    </nav>
-    <div class="icons">
-        <a href="#" class="fas fa-heart"></a>
-        <a href="#" class="fas fa-shopping-cart"></a>
-        <a href="#" class="fas fa-user"></a>
-    </div>
-</header>
 
 <div class="container light-style flex-grow-1 container-p-y">
     <h4 class="font-weight-bold py-3 mb-4">
@@ -81,5 +63,4 @@
     </div>
 </div>
 </body>
-
 </html>

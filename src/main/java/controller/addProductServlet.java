@@ -21,15 +21,6 @@ public class addProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-//        System.out.println(request.getParameter("idProduct")+
-//                request.getParameter("name")+
-//                request.getParameter("description")+
-//                request.getParameter("price")+
-//                request.getParameter("qty")+
-//                request.getParameter("brand")+
-//                request.getParameter("figure")+
-//                request.getParameter("image_src"));
         request.setCharacterEncoding("UTF-8");
         String idProduct = request.getParameter("idProduct");
         String name = request.getParameter("name");
