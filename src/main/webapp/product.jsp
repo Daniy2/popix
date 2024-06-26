@@ -13,42 +13,23 @@
 <body>
 
 <%@include file="fragments/header.jsp"%>
-<!--
-<header>
-<img src="/images/logo-noborderico.png" alt="Logo" class="header-photo">
-<input type="checkbox" id="toggler">
-<label for="toggler" class="fas fa-bars"></label>
-<a href="#" class="logo">Pop<span>!</span>x</a>
-<nav class="navbar">
-    <a href="#">Home</a>
-    <a href="#">Prodotti</a>
-    <a href="#">Saldi</a>
-</nav>
-<div class="icons">
-    <a href="#" class="fas fa-heart"></a>
-    <a href="#" class="fas fa-shopping-cart"></a>
-    <a href="#" class="fas fa-user"></a>
-</div>
-</header>-->
-
-<div class="product-container container mt-5">
-    <div class="row">
-        <div class="product-image col-md-6">
-            <img src="#" alt="Product Image" class="img-fluid">
+<main>
+    <section class="product-container">
+        <div class="product-image">
+            <img src="#" alt="Product Image">
         </div>
-        <div class="product-details col-md-6">
+        <div class="product-details">
             <h1 class="product-name">Product Name</h1>
-            <h2>Brand</h2>
-            <p class="product-description">This is a great product that provides many excellent features and benefits. It's made from high-quality materials and offers great value for money.</p>
-            <p class="product-price">$49.99</p>
-            <div class="quantity-selector mt-3">
-                <label for="quantity" class="form-label">Quantità:</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control">
+            <h2 class="product-brand">Brand Name</h2>
+            <p class="product-price">$99.99</p>
+            <div class="quantity-selector">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" id="quantity" class="form-control" value="1" min="1">
             </div>
-            <button class="add-to-cart btn btn-warning">Aggiungi al carrello</button>
+            <button class="add-to-cart">Add to Cart</button>
         </div>
-    </div>
-</div>
-<%@include file="fragments/footer.jsp"%>
+    </section>
+</main>
+<%@include file="fragments/footer2.jsp"%>
 </body>
 </html>

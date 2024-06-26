@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/footer-style2.css">
 </head>
 <body>
 
