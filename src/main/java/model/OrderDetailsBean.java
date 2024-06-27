@@ -1,0 +1,51 @@
+package model;
+
+import java.io.Serializable;
+
+public class OrderDetailsBean implements Serializable {
+    private int orderId;
+    private ProductBean productBean;
+    private int Quantity;
+
+    public OrderDetailsBean() {
+    }
+
+    public OrderDetailsBean(int orderId, ProductBean productBean, int quantity) {
+        this.orderId = orderId;
+        this.productBean = productBean;
+        Quantity = quantity;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public ProductBean getProductBean() {
+        return productBean;
+    }
+
+    public void setProductBean(ProductBean productBean) {
+        this.productBean = productBean;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetailsBean{" +
+                "orderId=" + orderId +
+                ", productBean=" + productBean +
+                ", Quantity=" + Quantity +
+                '}';
+    }
+}
