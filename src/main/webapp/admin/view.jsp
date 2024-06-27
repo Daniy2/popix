@@ -58,13 +58,13 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>User</th>
+                    <th>Ordine</th>
+                    <th>Utente</th>
                     <th>Nome Prodotto</th>
                     <th>Brand</th>
-                    <th>Character</th>
+                    <th>Data</th>
                     <th>Prezzo</th>
-                    <th>Pezzi</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>

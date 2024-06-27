@@ -6,6 +6,7 @@ public class OrderDetailsBean implements Serializable {
     private int orderId;
     private ProductBean productBean;
     private int Quantity;
+    private int Price;
 
     public OrderDetailsBean() {
     }
@@ -36,8 +37,16 @@ public class OrderDetailsBean implements Serializable {
         return Quantity;
     }
 
+    public double getPrice(){
+        return Price;
+    }
+
     public void setQuantity(int quantity) {
         Quantity = quantity;
+    }
+
+    public void setPrice(double price) {
+        price = price;
     }
 
     @Override

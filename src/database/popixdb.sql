@@ -57,6 +57,7 @@ CREATE TABLE OrderDetails (
     IdOrder INT not null,
     IdProduct VARCHAR(5) not null,
     Quantity INT not null,
+    Price DECIMAL(10,2) not null,
     PRIMARY KEY (IdOrder, IdProduct),
     FOREIGN KEY (IdOrder) REFERENCES Ord(IdOrder) ON DELETE CASCADE,
     FOREIGN KEY (IdProduct) REFERENCES Product(IdProduct) ON DELETE CASCADE

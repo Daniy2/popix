@@ -37,6 +37,7 @@ public class OrderDetailsDao implements OrderDetailsInterface{
         ResultSet rs = null;
         ArrayList<OrderDetailsBean> orderDetailsBeans = new ArrayList<>();
         String selectSql = "SELECT " +
+                TABLE_NAME +".Price"+
                 TABLE_NAME + ".idProduct"+
                 "u.Username, " +
                 "o.Date, " +
@@ -63,6 +64,7 @@ public class OrderDetailsDao implements OrderDetailsInterface{
                 ProductDao productDao = new ProductDao();
                 ProductBean productBean = productDao.retrieveProduct(idProd);
                 bean.setProductBean(productBean);
+                bean.setPrice(rs.getDouble("orderdetails.Price"));
                 orderDetailsBeans.add(bean);
 
             }
@@ -79,7 +81,7 @@ public class OrderDetailsDao implements OrderDetailsInterface{
     public void updateOrderDetails(OrderDetailsBean orderDetails) {
         Connection con = null;
         PreparedStatement ps = null;
-        String insertSql = "INSERT INTO " + TABLE_NAME + "(idOrder,idProduct,Quantity) VALUES (?,?,?)";
+        String insertSql = "INSERT INTO " + TABLE_NAME + "(idOrder,idProduct,Quantity,Price) VALUES (?,?,?,?)";
 
         try{
             con = ds.getConnection();
@@ -88,6 +90,7 @@ public class OrderDetailsDao implements OrderDetailsInterface{
             ps.setInt(1,orderDetails.getOrderId());
             ps.setString(2, orderDetails.getProductBean().getId());
             ps.setInt(3, orderDetails.getQuantity());
+            ps.setDouble(4, orderDetails.getPrice());
             ps.executeUpdate();
             con.commit();
 

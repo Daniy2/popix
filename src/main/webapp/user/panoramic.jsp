@@ -37,10 +37,10 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>Ordine</th>
             <th>Nome Prodotto</th>
             <th>Brand</th>
-            <th>Character</th>
+            <th>Data</th>
             <th>Prezzo</th>
             <th>Pezzi</th>
         </tr>
