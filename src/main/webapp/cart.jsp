@@ -1,5 +1,7 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %><html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.ProductBean" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,54 +21,48 @@
         <section class="cart">
             <h2>Il tuo carrello</h2>
             <div class="cart-items">
+                <%
+                    List<ProductBean> cart = (List<ProductBean>) session.getAttribute("cart");
+                    if (cart != null && !cart.isEmpty()) {
+                        for (ProductBean product : cart) {
+                %>
                 <div class="cart-item">
-                    <img src="#" alt="Product Image">
+                    <img src="<%= request.getContextPath() %>/getPictureServlet?id=<%= product.getId()%>" alt="Product image">
                     <div class="item-details">
-                        <h3>Product Name</h3>
-                        <p>ID ######</p>
-                        <p>Prezzo: $99.99</p>
+                        <h3><%= product.getName() %></h3>
+                        <p>ID <%= product.getId() %></p>
+                        <p>Prezzo: $<%= product.getPrice() %></p>
                         <div class="quantity">
-                            <button>-</button>
-                            <span>1</span>        <!--needs script-->
-                            <button>+</button>
+                            <span><%= product.getQuantity()%></span>
                         </div>
                     </div>
                     <button class="remove-item"><i class="fas fa-trash-alt"></i></button>
                 </div>
-
-                <!-- Example of another cart item -->
-                <div class="cart-item">
-                    <img src="#" alt="Product Image">
-                    <div class="item-details">
-                        <h3>Another Product</h3>
-                        <p>ID ######</p>
-                        <p>Prezzo: $49.99</p>
-                        <div class="quantity">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                    </div>
-                    <button class="remove-item"><i class="fas fa-trash-alt"></i></button>
-                </div>
+                <%
+                    }
+                } else {
+                %>
+                <p>Il tuo carrello è vuoto.</p>
+                <%
+                    }
+                %>
             </div>
-
-            <div class="shipping">
-                <form>
-                    <label for="shipping-method">Choose Shipping:</label>
-                    <select id="shipping-method" name="shipping-method">
-                        <option value="standard">Standard Delivery - &euro;5.00</option>
-                        <option value="premium">Premium Delivery - &euro;10.00</option>
-                    </select>
-                </form>
-            </div>
-
             <div class="cart-summary">
                 <h3>Riepilogo</h3>
                 <div class="summary-details">
-                    <p>Subtotale: #</p>
-                    <p>Iva: #</p>
-                    <p>Totale: #</p>
+
+                    <%
+                        double sum = 0;
+                        String formattedSum = "0.00";
+                        if(cart != null) {
+                            for (ProductBean product : cart) {
+                                sum += product.getPrice()*product.getQuantity();
+                            }
+                            formattedSum = String.format("%.2f", sum);
+                        }
+
+                    %>
+                    <p>Totale: <%=formattedSum%></p>
                 </div>
                 <button class="checkout-btn">CHECKOUT</button>
             </div>

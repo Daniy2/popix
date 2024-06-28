@@ -81,7 +81,7 @@
                 <div class="image">
                     <img src="<%= request.getContextPath() %>/getPictureServlet?id=<%= product.getId()%>" alt="Product image">
                     <div class="icons">
-                        <a href="#" class="cart-btn">Aggiungi al carrello</a>
+                        <a href="${pageContext.request.contextPath}/addCartServlet?id=<%= product.getId()%>&qty=1" class="cart-btn">Aggiungi al carrello</a>
                         <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=<%= product.getId()%>" class="fas fa-share"></a>
                     </div>
                 </div>

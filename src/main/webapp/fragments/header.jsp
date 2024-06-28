@@ -21,7 +21,7 @@
         <a href="${pageContext.request.contextPath}/products.jsp">Prodotti</a>
     </nav>
     <div class="icons">
-        <a href="#" class="fas fa-shopping-cart"></a>
+        <a href="cart.jsp" class="fas fa-shopping-cart"></a>
         <% if (isLoggedIn && userBean.getRole().equals(Role.user)) { %>
         <a href="#" class="fas fa-user"> <span><%= userBean.getUsername() %></span></a>
         <a href="${pageContext.request.contextPath}/logout?l-out=yes" class="fas fa-sign-out-alt"></a>
