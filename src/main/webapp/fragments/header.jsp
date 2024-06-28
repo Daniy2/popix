@@ -19,7 +19,6 @@
     <nav class="navbar">
         <a href="${pageContext.request.contextPath}/home.jsp">Home</a>
         <a href="${pageContext.request.contextPath}/products.jsp">Prodotti</a>
-        <a href="#">Saldi</a>
     </nav>
     <div class="icons">
         <a href="#" class="fas fa-shopping-cart"></a>

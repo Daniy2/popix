@@ -70,7 +70,7 @@
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=956" alt="Product Image">
                 <div class="icons">
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                    <a href="#" class="fas fa-share"></a>
+                    <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=956" class="fas fa-share"></a>
                 </div>
             </div>
             <div class="content">
@@ -93,7 +93,7 @@
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=98" alt="Product Image">
                 <div class="icons">
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                    <a href="#" class="fas fa-share"></a>
+                    <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=98" class="fas fa-share"></a>
                 </div>
             </div>
             <div class="content">
@@ -117,7 +117,7 @@
                 <div class="icons">
 
                     <a href="#" class="cart-btn">Aggiungi al carrello</a>
-                    <a href="#" class="fas fa-share"></a>
+                    <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=10" class="fas fa-share"></a>
                 </div>
             </div>
             <div class="content">

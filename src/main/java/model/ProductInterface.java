@@ -9,6 +9,7 @@ public interface ProductInterface {
     ArrayList<ProductBean> retrieveAllProductsByBrand(String brand);
     ArrayList<ProductBean> retrieveAllProductsByFigure(String figure);
     ArrayList<ProductBean> retrieveAllProductsByPrice();
+    ArrayList<ProductBean> retrieveAllProductsByPriceDec();
 
 
 

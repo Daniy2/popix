@@ -24,24 +24,12 @@
     try {
         productBeans = (ArrayList<ProductBean>) request.getAttribute("products");
     } catch (ClassCastException e) {
-        //System.out.println("Error: products attribute is not of type ArrayList<ProductBean>");
         e.printStackTrace();
     }
 
     if (productBeans == null) {
-        //System.out.println("Products attribute is null, forwarding to getProductsServlet");
         request.getRequestDispatcher("/getProductsServlet").forward(request, response);
         return;
-    }
-
-    if (!productBeans.isEmpty()) {
-        /*Iterator<ProductBean> iterator = productBeans.iterator();
-        while (iterator.hasNext()) {
-            ProductBean productBean = iterator.next();
-            System.out.println("Product: " + productBean);
-        }*/
-    } else {
-        System.out.println("No products found.");
     }
 
     int totalProducts = productBeans.size();
@@ -62,42 +50,25 @@
     int end = Math.min(start + productsPerPage, totalProducts);
 
     List<ProductBean> productsForCurrentPage = productBeans.subList(start, end);
-
 %>
 
-
-<!-- Home start -->
-<!-- Home end -->
-
-<!-- About start -->
-
-<!-- About end -->
-
-<!-- Products start -->
 <div class="container">
     <aside class="sidebar">
-        <form action="#">
-            <select name="category">
+        <form action="${pageContext.request.contextPath}/getProductsServlet" method="GET">
+            <select name="category" onchange="this.form.submit()">
                 <option value="">Brand</option>
-                <option value="onepiece">One piece</option>
-                <option value="dragonball">Dragon Ball</option>
-                <option value="naruto">Naruto</option>
-                <option value="disney">Disney</option>
-                <option value="pokemon">Pokemon</option>
-                <option value="myheroacademia">My Hero Academia</option>
+                <option value="one piece" <%= "one piece".equals(request.getParameter("category")) ? "selected" : "" %>>One piece</option>
+                <option value="dragon ball" <%= "dragon ball".equals(request.getParameter("category")) ? "selected" : "" %>>Dragon Ball</option>
+                <option value="naruto" <%= "naruto".equals(request.getParameter("category")) ? "selected" : "" %>>Naruto</option>
+                <option value="disney" <%= "disney".equals(request.getParameter("category")) ? "selected" : "" %>>Disney</option>
+                <option value="pokemon" <%= "pokemon".equals(request.getParameter("category")) ? "selected" : "" %>>Pokemon</option>
+                <option value="my hero academia" <%= "my hero academia".equals(request.getParameter("category")) ? "selected" : "" %>>My Hero Academia</option>
             </select>
-            <select name="price" id="price-filter">
+            <select name="price" id="price-filter" onchange="this.form.submit()">
                 <option value="">Price</option>
-                <option value="low">Dal più basso al più alto</option>
-                <option value="high">Dal più alto al più basso</option>
-                <option value="personalizzato">Personalizzato</option>
+                <option value="low" <%= "low".equals(request.getParameter("price")) ? "selected" : "" %>>Dal più basso al più alto</option>
+                <option value="high" <%= "high".equals(request.getParameter("price")) ? "selected" : "" %>>Dal più alto al più basso</option>
             </select>
-            <div id="custom-price-range" style="display: none;">
-                <label for="price-range">Select price range:</label>
-                <input type="range" class="form-range" id="price-range" min="0" max="100" step="1" value="50">
-                <output id="range-value">50</output>
-            </div>
-            <button type="submit">Cerca</button>
         </form>
     </aside>
 
@@ -127,28 +98,27 @@
     </section>
 </div>
 
-
 <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item <%= currentPage == 1 ? "disabled" : "" %>">
-            <a class="page-link" href="?page=<%= currentPage - 1 %>">Precedente</a>
+            <a class="page-link" href="?page=<%= currentPage - 1 %>&category=<%= request.getParameter("category") %>&price=<%= request.getParameter("price") %>">Precedente</a>
         </li>
         <%
             for (int i = 1; i <= totalPages; i++) {
         %>
         <li class="page-item <%= currentPage == i ? "active" : "" %>">
-            <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+            <a class="page-link" href="?page=<%= i %>&category=<%= request.getParameter("category") %>&price=<%= request.getParameter("price") %>"><%= i %></a>
         </li>
         <%
             }
         %>
         <li class="page-item <%= currentPage == totalPages ? "disabled" : "" %>">
-            <a class="page-link" href="?page=<%= currentPage + 1 %>">Successivo</a>
+            <a class="page-link" href="?page=<%= currentPage + 1 %>&category=<%= request.getParameter("category") %>&price=<%= request.getParameter("price") %>">Successivo</a>
         </li>
     </ul>
 </nav>
-<%@include file="fragments/footer.jsp"%>
 
+<%@include file="fragments/footer.jsp"%>
 
 </body>
 </html>

@@ -192,7 +192,35 @@ public class ProductDao implements ProductInterface{
         Connection con = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String selectSql = "SELECT * FROM "+Table_Name+" ORDER BY Cost";
+        String selectSql = "SELECT * FROM "+Table_Name+" ORDER BY Cost ASC";
+
+        try{
+            con = ds.getConnection();
+            preparedStatement = con.prepareStatement(selectSql);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                ProductBean productBean = new ProductBean();
+                Fillproduct(resultSet, productBean);
+                productBeans.add(productBean);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return productBeans;
+    }
+
+    @Override
+    public ArrayList<ProductBean> retrieveAllProductsByPriceDec() {
+        ArrayList<ProductBean> productBeans = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String selectSql = "SELECT * FROM "+Table_Name+" ORDER BY Cost DESC ";
 
         try{
             con = ds.getConnection();
@@ -214,3 +242,5 @@ public class ProductDao implements ProductInterface{
         return productBeans;
     }
 }
+
+
