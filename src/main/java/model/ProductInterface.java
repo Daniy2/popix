@@ -11,7 +11,8 @@ public interface ProductInterface {
     ArrayList<ProductBean> retrieveAllProductsByPrice();
     ArrayList<ProductBean> retrieveAllProductsByPriceDec();
     void ShoppedItem(String id, int qty);
-
+    void DeleteProduct(String id);
+    void ModifyProduct(ProductBean productBean);
 
 
 }

@@ -92,8 +92,8 @@
             <td><%=product.getName()%></td>
             <td><%=product.getPrice()%></td>
             <td><%=product.getQuantity()%></td>
-            <td><button onclick="modificaProdotto(1)">Modifica</button>  <!--method name-->
-                <button onclick="eliminaProdotto(1)">Elimina</button></td>
+            <td><a href="modify.jsp?idP=<%=product.getId()%>&Price=<%= product.getPrice()%>"><button>Modifica</button></a>  <!--method name-->
+                <a href="${pageContext.request.contextPath}/DeleteServlet?Del=<%=product.getId()%>"><button id="deleteButton" >Elimina</button></a></td>
         </tr>
 
         <%
@@ -104,8 +104,8 @@
     </table>
 </div>
 
-<button class="btn-add-product" id="addProdBtn">Aggiungi Prodotto</button>
-<button class="btn-add-product" id="viewOrdersBtn">Visualizza ordini</button>
+<a href="addProd.jsp"><button class="btn-add-product" id="addProdBtn">Aggiungi Prodotto</button></a>
+<button class="btn-add-product" id="viewOrdersBtn"> Visualizza ordini</button>
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">

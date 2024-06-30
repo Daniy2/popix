@@ -1,4 +1,5 @@
-
+<%@ page import="model.ProductDao" %>
+<%@ page import="model.ProductBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,109 +10,71 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles-mod.css">
     <script src="https://kit.fontawesome.com/892069e9ac.js" crossorigin="anonymous"></script>
-    <title>Admin- Modifica</title>
+    <title>Admin - Modifica Prodotto</title>
 </head>
 <body>
 
 <%@include file="../fragments/header.jsp"%>
-<!--Header
-<header>
-    <img src="/images/logo-noborderico.png" alt="Logo" class="header-photo">
-    <input type="checkbox" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
-    <a href="#" class="logo">Pop<span>!</span>x</a>
-    <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Prodotti</a>
-        <a href="#">Saldi</a>
-    </nav>
-    <div class="icons">
-        <a href="#" class="fas fa-heart"></a>
-        <a href="#" class="fas fa-shopping-cart"></a>
-        <a href="#" class="fas fa-user"></a>
-    </div>
-</header>
 
--->
+<%
+    ProductDao productDao = new ProductDao();
+    String idProduct = request.getParameter("idP");
+    ProductBean productBean = productDao.retrieveProduct(idProduct);
+    if (productBean == null) {
+        response.sendError(HttpServletResponse.SC_NOT_FOUND, "Prodotto non trovato");
+        return;
+    }
+%>
 
-
-
-<h2>Modifica prodotto</h2>
-<form class="form-horizontal">
-    <div class="form-row">
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" required>
+<div class="container">
+    <h2>Modifica prodotto</h2>
+    <form class="form-horizontal" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${pageContext.request.contextPath}/modifyServlet">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" value="<%= productBean.getName()%>" class="form-control" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="idProduct">ID</label>
+                <input type="text" id="idProduct" name="idProduct" value="<%= productBean.getId()%>" class="form-control" readonly>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="price">Prezzo</label>
+                <input type="number" id="price" name="price" value="<%= request.getParameter("Price")%>" step="0.01" class="form-control" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id" required>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="brand">Brand</label>
+                <input type="text" id="brand" name="brand" value="<%= productBean.getBrand()%>" class="form-control" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="figure">Personaggio</label>
+                <input type="text" id="figure" name="figure" value="<%= productBean.getFigure()%>" class="form-control" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="prezzo">Prezzo</label>
-            <input type="number" id="prezzo" name="prezzo" required>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="qty">Quantità</label>
+                <input type="number" id="qty" name="qty" value="<%= productBean.getQuantity()%>" class="form-control" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="img_src">Immagine</label>
+                <img src="<%= request.getContextPath() %>/getPictureServlet?id=<%= productBean.getId() %>" alt="Product image" class="img-fluid mb-2">
+                <input type="file" id="img_src" name="img_src" accept="image/*" class="form-control">
+            </div>
         </div>
-    </div>
-    <div class="form-row">
-
-        <div class="form-group">
-            <label for="brand">Brand</label>
-            <input type="text" id="brand" name="brand" required>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="description">Descrizione</label>
+                <textarea id="description" name="description" rows="4" class="form-control" required><%= productBean.getDescription()%></textarea>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="personaggio">Personaggio</label>
-            <input type="text" id="personaggio" name="personaggio" required>
+        <div class="form-row mt-3">
+            <button type="submit" class="btn btn-primary">Aggiorna</button>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="quantita">Quantità</label>
-            <input type="number" id="quantita" name="quantita" required>
-        </div>
-        <div class="form-group">
-            <label for="immagine">Immagine</label>
-            <input type="file" id="immagine" name="immagine" accept="image/*" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group full-width">
-            <label for="descrizione">Descrizione</label>
-            <textarea id="descrizione" name="descrizione" rows="4" required></textarea>
-        </div>
-    </div>
-    <div class="form-row">
-        <button type="submit">Submit</button>
-    </div>
-</form>
-
-<!--
-<section class="footer">
-    <div class="box-container">
-        <div class="box">
-            <h3>Quick links</h3>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Products</a>
-        </div>
-        <div class="box">
-            <h3>Extra links</h3>
-            <a href="#">My account</a>
-            <a href="#">My order</a>
-            <a href="#">Favourites</a>
-        </div>
-        <div class="box">
-            <h3>Contact info</h3>
-            <a href="mailto:g.bonagura4@studenti.unisa.it">g.bonagura4@studenti.unisa.it</a>
-            <a href="mailto:d.scaparra@studenti.unisa.it">d.scaparra@studenti.unisa.it</a>
-            <a href="#">Fisciano, SA 84084, IT</a>
-        </div>
-    </div>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2024 Copyright: All rights reserved
-    </div>
-</section>
-
--->
+    </form>
+</div>
 
 <%@include file="../fragments/footer.jsp"%>
 

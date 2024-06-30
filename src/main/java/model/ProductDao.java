@@ -273,6 +273,79 @@ public class ProductDao implements ProductInterface{
             errorConnUpdate(con, preparedStatement);
         }
     }
+
+    @Override
+    public void DeleteProduct(String id) {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+
+        String deleteSql = "DELETE FROM " + Table_Name + " WHERE idProduct = ?";
+
+        try {
+            con = ds.getConnection();
+            con.setAutoCommit(false);
+            preparedStatement = con.prepareStatement(deleteSql);
+            preparedStatement.setString(1, id);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Nessuna riga è stata eliminata. Prodotto non trovato con ID: " + id);
+            }
+
+            con.commit();
+
+        } catch (SQLException e) {
+            try {
+                if (con != null)
+                    con.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException("Errore durante rollback", ex);
+            }
+            throw new RuntimeException("Errore durante transazione SQL", e);
+        } finally {
+            errorConnUpdate(con, preparedStatement);
+        }
+    }
+
+    public void ModifyProduct(ProductBean productBean) {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateSql = "UPDATE " + Table_Name + " SET Name = ?, Description = ?, Cost = ?, Pieces_in_stock = ?, Image_src = ?, Brand = ?, Figure = ? WHERE idProduct = ?";
+
+        try {
+            con = ds.getConnection();
+            con.setAutoCommit(false);
+            preparedStatement = con.prepareStatement(updateSql);
+
+            preparedStatement.setString(1, productBean.getName());
+            preparedStatement.setString(2, productBean.getDescription());
+            preparedStatement.setDouble(3, productBean.getPrice());
+            preparedStatement.setInt(4, productBean.getQuantity());
+            preparedStatement.setBlob(5, productBean.getImage());
+            preparedStatement.setString(6, productBean.getBrand());
+            preparedStatement.setString(7, productBean.getFigure());
+            preparedStatement.setString(8, productBean.getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Nessuna riga è stata modificata. Prodotto non trovato con ID: " + productBean.getId());
+            }
+
+            con.commit();
+
+        } catch (SQLException e) {
+            try {
+                if (con != null)
+                    con.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException("Errore durante rollback", ex);
+            }
+            throw new RuntimeException("Errore durante transazione SQL", e);
+        } finally {
+            errorConnUpdate(con, preparedStatement);
+        }
+    }
 }
-
-
