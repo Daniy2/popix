@@ -18,6 +18,7 @@ public class addCartServlet extends HttpServlet {
         int qty = Integer.parseInt(request.getParameter("qty")); // Ottieni la quantità specificata dall'utente
         ProductDao productDao = new ProductDao();
         ProductBean productBean = productDao.retrieveProduct(id);
+        System.out.println("sono in add cart servlet "+productBean.getPrice());
         ArrayList<ProductBean> beans = (ArrayList<ProductBean>) session.getAttribute("cart");
         if (beans == null) {
             beans = new ArrayList<>();

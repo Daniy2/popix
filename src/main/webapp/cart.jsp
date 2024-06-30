@@ -79,7 +79,6 @@
 
 <%
     Boolean loginRequired = (Boolean) request.getAttribute("login_required");
-    System.out.println(loginRequired);
     if (loginRequired != null && loginRequired) {
 %>
 

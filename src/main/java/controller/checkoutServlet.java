@@ -1,9 +1,6 @@
 package controller;
 
-import model.OrderBean;
-import model.OrderDao;
-import model.ProductBean;
-import model.UserBean;
+import model.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,7 +18,9 @@ public class checkoutServlet extends HttpServlet {
             UserBean userBean = (UserBean) request.getSession().getAttribute("user");
             if(request.getSession().getAttribute("cart") != null) {
                 ArrayList<ProductBean> cartList = (ArrayList<ProductBean>) request.getSession().getAttribute("cart");
-
+                for(ProductBean productBean : cartList) {
+                    System.out.println("Stampa dei beans :"+productBean);
+                }
                 OrderBean orderBean = new OrderBean();
                 orderBean.setCustomer(userBean.getEmail());
                 orderBean.setStatus("IN_PROGRESS");
@@ -46,7 +45,29 @@ public class checkoutServlet extends HttpServlet {
 
                 OrderDao orderDao = new OrderDao();
                 orderDao.doSave(orderBean);
+
+                int orderId = orderDao.getOrderId();
+                OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
+                OrderDetailsBean orderDetailsBean = new OrderDetailsBean();
+
+                ProductDao productDao = new ProductDao();
+
+                for (ProductBean productBean : cartList) {
+
+
+                    orderDetailsBean.setOrderId(orderId);
+                    orderDetailsBean.setProductBean(productBean);
+                    orderDetailsBean.setPrice(productBean.getPrice());
+                    System.out.println("checkout"+orderDetailsBean.getPrice());
+                    orderDetailsBean.setQuantity(productBean.getQuantity());
+                    orderDetailsDao.updateOrderDetails(orderDetailsBean);
+                    productDao.ShoppedItem(productBean.getId(), productBean.getQuantity());
+
+                    System.out.println("ookokoko");
+                }
+
                 session.removeAttribute("cart");
+
                 response.sendRedirect("home.jsp");
 
 

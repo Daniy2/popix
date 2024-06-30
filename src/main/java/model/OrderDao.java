@@ -121,9 +121,9 @@ public class OrderDao implements OrderInterface{
         try{
             con = ds.getConnection();
             preparedStatement = con.prepareStatement(selectSql);
-            resultSet = preparedStatement.executeQuery();
             preparedStatement.setDate(1,from);
             preparedStatement.setDate(2,to);
+            resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 OrderBean order = new OrderBean();
@@ -141,4 +141,30 @@ public class OrderDao implements OrderInterface{
         }
         return orders;
     }
+
+    public int getOrderId() {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int lastId = 0;
+
+        try {
+            con = ds.getConnection();
+            String sql = "SELECT LAST_INSERT_ID() AS last_id";
+
+            preparedStatement = con.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                lastId = resultSet.getInt("last_id");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante il recupero dell'ultimo ID dell'ordine", e);
+        } finally {
+            errorConn(con, preparedStatement, resultSet);
+        }
+
+        return lastId;
+    }
+
 }

@@ -69,7 +69,7 @@
                 %>
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=956" alt="Product Image">
                 <div class="icons">
-                    <a href="#" class="cart-btn">Aggiungi al carrello</a>
+                    <a href="${pageContext.request.contextPath}/addCartServlet?id=956&qty=1" class="cart-btn">Aggiungi al carrello</a>
                     <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=956" class="fas fa-share"></a>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 %>
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=98" alt="Product Image">
                 <div class="icons">
-                    <a href="#" class="cart-btn">Aggiungi al carrello</a>
+                    <a href="${pageContext.request.contextPath}/addCartServlet?id=98&qty=1" class="cart-btn">Aggiungi al carrello</a>
                     <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=98" class="fas fa-share"></a>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                 <img src="<%= request.getContextPath() %>/getPictureServlet?id=10" alt="Product Image">
                 <div class="icons">
 
-                    <a href="#" class="cart-btn">Aggiungi al carrello</a>
+                    <a href="${pageContext.request.contextPath}/addCartServlet?id=10&qty=1" class="cart-btn">Aggiungi al carrello</a>
                     <a href="${pageContext.request.contextPath}/getSingleProductServlet?id=10" class="fas fa-share"></a>
                 </div>
             </div>

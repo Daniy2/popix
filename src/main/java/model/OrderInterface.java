@@ -7,4 +7,6 @@ public interface OrderInterface {
     void doSave(OrderBean order);
     ArrayList<OrderBean> getOrders();
     ArrayList<OrderBean> getOrdersSorted(Date from, Date to);
+    int getOrderId();
+
 }

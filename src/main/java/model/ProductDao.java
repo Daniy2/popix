@@ -241,6 +241,38 @@ public class ProductDao implements ProductInterface{
 
         return productBeans;
     }
+
+    @Override
+    public void ShoppedItem(String id, int qty) {
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+
+        String updateProductSql = "UPDATE "+Table_Name+ " SET Pieces_in_stock = Pieces_in_stock - ? WHERE IdProduct = ?";
+
+        try{
+            con = ds.getConnection();
+            con.setAutoCommit(false);
+            preparedStatement = con.prepareStatement(updateProductSql);
+
+            preparedStatement.setInt(1,qty);
+            preparedStatement.setString(2,id);
+
+            preparedStatement.executeUpdate();
+
+            con.commit();
+
+        }catch (SQLException e) {
+            try{
+                if(con!=null)
+                    con.rollback();
+            }catch (SQLException ex){
+                throw new RuntimeException("Errore durrante rollback",ex);
+            }
+            throw new RuntimeException("Errore durante transazione sql",e);
+        }finally {
+            errorConnUpdate(con, preparedStatement);
+        }
+    }
 }
 
 

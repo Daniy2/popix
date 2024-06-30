@@ -10,6 +10,7 @@ public interface ProductInterface {
     ArrayList<ProductBean> retrieveAllProductsByFigure(String figure);
     ArrayList<ProductBean> retrieveAllProductsByPrice();
     ArrayList<ProductBean> retrieveAllProductsByPriceDec();
+    void ShoppedItem(String id, int qty);
 
 
 

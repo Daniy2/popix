@@ -6,15 +6,16 @@ public class OrderDetailsBean implements Serializable {
     private int orderId;
     private ProductBean productBean;
     private int Quantity;
-    private int Price;
+    private double Price;
 
     public OrderDetailsBean() {
     }
 
-    public OrderDetailsBean(int orderId, ProductBean productBean, int quantity) {
+    public OrderDetailsBean(int orderId, ProductBean productBean, int quantity, double price) {
         this.orderId = orderId;
         this.productBean = productBean;
-        Quantity = quantity;
+        this.Quantity = quantity;
+        this.Price = price;
     }
 
     public int getOrderId() {
@@ -46,7 +47,7 @@ public class OrderDetailsBean implements Serializable {
     }
 
     public void setPrice(double price) {
-        price = price;
+        this.Price = price;
     }
 
     @Override
