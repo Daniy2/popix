@@ -1,3 +1,5 @@
+<%@ page import="model.OrderDetailsBean" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -40,29 +42,27 @@
             <th>Ordine</th>
             <th>Nome Prodotto</th>
             <th>Brand</th>
-            <th>Data</th>
             <th>Prezzo</th>
             <th>Pezzi</th>
         </tr>
         </thead>
         <tbody>
+        <%
+            ArrayList<OrderDetailsBean> orderBeans = (ArrayList<OrderDetailsBean>) request.getAttribute("orderDetails");
+            if (orderBeans != null) {
+                for (OrderDetailsBean order : orderBeans) {
+        %>
         <tr>
-            <td>1</td>
-            <td>Product #1</td>
-            <td>Brand #1</td>
-            <td>Character #1</td>
-            <td>€0.00</td>
-            <td>#</td>
+            <td><%= order.getOrderId() %></td>
+            <td><%= order.getProductBean().getName() %></td>
+            <td><%= order.getProductBean().getBrand() %></td>
+            <td><%= order.getPrice() %></td>
+            <td><%= order.getQuantity() %></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Product #2</td>
-            <td>Brand #2</td>
-            <td>Character #2</td>
-            <td>€0.00</td>
-            <td>#</td>
-        </tr>
-        <!-- Add more rows as needed -->
+        <%
+                }
+            }
+        %>
         </tbody>
     </table>
 </div>

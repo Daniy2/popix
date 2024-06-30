@@ -86,7 +86,7 @@ public class OrderDao implements OrderInterface{
                 OrderBean order = new OrderBean();
                 order.setOrderDate(resultSet.getDate("ord.Date"));
                 order.setCustomer(resultSet.getString("u.Username"));
-                order.setCustomer(resultSet.getString("ord.Status"));
+                order.setStatus(resultSet.getString("ord.Status"));
                 order.setIdOrd(resultSet.getInt("ord.idOrder"));
                 order.setSubtotal(resultSet.getDouble("ord.Subtotal"));
                 orders.add(order);

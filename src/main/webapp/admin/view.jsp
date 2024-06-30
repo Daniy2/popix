@@ -1,4 +1,5 @@
-
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.OrderBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,29 +16,18 @@
 
 <body>
 <%@include file="../fragments/header.jsp"%>
-<!--
-<header>
-  <img src="/images/logo-noborderico.png" alt="Logo" class="header-photo">
-  <input type="checkbox" id="toggler">
-  <label for="toggler" class="fas fa-bars"></label>
-  <a href="#" class="logo">Pop<span>!</span>x</a>
-  <nav class="navbar">
-    <a href="#">Home</a>
-    <a href="#">Prodotti</a>
-    <a href="#">Saldi</a>
-  </nav>
-  <div class="icons">
-    <a href="#" class="fas fa-heart"></a>
-    <a href="#" class="fas fa-shopping-cart"></a>
-    <a href="#" class="fas fa-user"></a>
-  </div>
-</header>-->
 
 <div class="container">
-    <h1 class="text-center mt-5 mb-4"> Storico ordini</h1>
+    <h1 class="text-center mt-5 mb-4">Storico ordini</h1>
+
+    <!-- Link per tornare alla pagina precedente (esempio) -->
+    <div class="text-center mb-3">
+        <a href="${pageContext.request.contextPath}/home.jsp" class="btn btn-secondary">Torna Indietro</a>
+    </div>
 
     <div class="row">
         <div class="col-md-3">
+            <!-- Sidebar di Filtraggio (può essere mantenuto come è) -->
             <div class="sidebar">
                 <h3>Filtra per Data</h3>
                 <form action="#">
@@ -55,82 +45,42 @@
         </div>
 
         <div class="col-md-9">
+            <!-- Tabella per visualizzare gli ordini -->
             <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Ordine</th>
                     <th>Utente</th>
-                    <th>Nome Prodotto</th>
-                    <th>Brand</th>
                     <th>Data</th>
                     <th>Prezzo</th>
                     <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
+                <!-- Iterazione attraverso la lista di ordini utilizzando JSP -->
+                <%
+                    ArrayList<OrderBean> orderBeans = (ArrayList<OrderBean>) request.getAttribute("orders");
+                    if (orderBeans != null) {
+                        for (OrderBean order : orderBeans) {
+                            System.out.println(order);
+                %>
                 <tr>
-                    <td>1</td>
-                    <td>User 1</td>
-                    <td>Product #1</td>
-                    <td>Brand #1</td>
-                    <td>Character #1</td>
-                    <td>€0.00</td>
-                    <td>#</td>
+                    <td><%= order.getIdOrd() %></td>
+                    <td><%= order.getCustomer() %></td>
+                    <td><%= order.getOrderDate() %></td>
+                    <td><%= order.getSubtotal() %></td>
+                    <td><%= order.getStatus() %></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>User 2</td>
-                    <td>Product #2</td>
-                    <td>Brand #2</td>
-                    <td>Character #2</td>
-                    <td>€0.00</td>
-                    <td>#</td>
-                </tr>
-                <!-- Add more rows as needed -->
+                <%
+                        }
+                    }
+                %>
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
 
-<nav aria-label="Page navigation example" class="pagination-container">
-    <ul class="pagination justify-content-center">
-        <li class="page-item"><a class="page-link" href="#">Precedente</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">4</a></li>
-        <li class="page-item"><a class="page-link" href="#">5</a></li>
-        <li class="page-item"><a class="page-link" href="#">Successivo</a></li>
-    </ul>
-</nav>
-
-<!-- <section class="footer">
-     <div class="box-container">
-         <div class="box">
-             <h3>Quick links</h3>
-             <a href="#">Home</a>
-             <a href="#">About</a>
-             <a href="#">Products</a>
-         </div>
-         <div class="box">
-             <h3>Extra links</h3>
-             <a href="#">My account</a>
-             <a href="#">My order</a>
-             <a href="#">Favourites</a>
-         </div>
-         <div class="box">
-             <h3>Contact info</h3>
-             <a href="mailto:g.bonagura4@studenti.unisa.it">g.bonagura4@studenti.unisa.it</a>
-             <a href="mailto:d.scaparra@studenti.unisa.it">d.scaparra@studenti.unisa.it</a>
-             <a href="#">Fisciano, SA 84084, IT</a>
-         </div>
-     </div>
-     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-         © 2024 Copyright: All rights reserved
-     </div>
- </section>--->
 <%@include file="../fragments/footer.jsp"%>
 </body>
 </html>

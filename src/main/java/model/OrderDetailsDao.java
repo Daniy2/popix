@@ -13,18 +13,17 @@ import java.util.ArrayList;
 import static model.Utility.errorConn;
 import static model.Utility.errorConnUpdate;
 
-public class OrderDetailsDao implements OrderDetailsInterface{
+public class OrderDetailsDao implements OrderDetailsInterface {
 
     private static final DataSource ds;
 
     static {
-        try{
+        try {
             Context ctx = new InitialContext();
             Context env = (Context) ctx.lookup("java:comp/env");
-
             ds = (DataSource) env.lookup("jdbc/popix");
         } catch (NamingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Errore nel recupero del DataSource", e);
         }
     }
 
@@ -37,8 +36,8 @@ public class OrderDetailsDao implements OrderDetailsInterface{
         ResultSet rs = null;
         ArrayList<OrderDetailsBean> orderDetailsBeans = new ArrayList<>();
         String selectSql = "SELECT " +
-                TABLE_NAME +".Price"+
-                TABLE_NAME + ".idProduct"+
+                "od.Price, " +
+                "od.idProduct, " +
                 "u.Username, " +
                 "o.Date, " +
                 "od.Quantity, " +
@@ -51,24 +50,24 @@ public class OrderDetailsDao implements OrderDetailsInterface{
                 "JOIN Product p ON od.IdProduct = p.IdProduct " +
                 "WHERE u.Email = ?";
 
-        try{
+        try {
             con = ds.getConnection();
             ps = con.prepareStatement(selectSql);
-            ps.setString(1,email);
-            while(rs.next()){
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 OrderDetailsBean bean = new OrderDetailsBean();
 
-                bean.setOrderId(rs.getInt("o.idOrder"));
+                bean.setOrderId(rs.getInt("o.IdOrder"));
                 bean.setQuantity(rs.getInt("od.Quantity"));
-                String idProd = rs.getString("orderdetails.idProduct");
+                String idProd = rs.getString("od.idProduct");
                 ProductDao productDao = new ProductDao();
                 ProductBean productBean = productDao.retrieveProduct(idProd);
                 bean.setProductBean(productBean);
-                bean.setPrice(rs.getDouble("orderdetails.Price"));
+                bean.setPrice(rs.getDouble("od.Price"));
                 orderDetailsBeans.add(bean);
-
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Errore durante l'esecuzione della query SQL", e);
         } finally {
             errorConn(con, ps, rs);
@@ -81,36 +80,28 @@ public class OrderDetailsDao implements OrderDetailsInterface{
     public void updateOrderDetails(OrderDetailsBean orderDetails) {
         Connection con = null;
         PreparedStatement ps = null;
-        String insertSql = "INSERT INTO " + TABLE_NAME + "(idOrder,idProduct,Quantity,Price) VALUES (?,?,?,?)";
+        String insertSql = "INSERT INTO " + TABLE_NAME + " (idOrder, idProduct, Quantity, Price) VALUES (?, ?, ?, ?)";
 
-        try{
+        try {
             con = ds.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(insertSql);
-            ps.setInt(1,orderDetails.getOrderId());
+            ps.setInt(1, orderDetails.getOrderId());
             ps.setString(2, orderDetails.getProductBean().getId());
             ps.setInt(3, orderDetails.getQuantity());
             ps.setDouble(4, orderDetails.getPrice());
             ps.executeUpdate();
             con.commit();
-
-
-
-
-
-        }catch (SQLException e) {
-            try{
-                if(con!=null)
+        } catch (SQLException e) {
+            try {
+                if (con != null)
                     con.rollback();
-            }catch (SQLException ex){
-                throw new RuntimeException("Errore durrante rollback",ex);
+            } catch (SQLException ex) {
+                throw new RuntimeException("Errore durante il rollback della transazione", ex);
             }
-            throw new RuntimeException("Errore durante transazione sql",e);
-        }finally {
+            throw new RuntimeException("Errore durante l'esecuzione della transazione SQL", e);
+        } finally {
             errorConnUpdate(con, ps);
         }
-
     }
 }
-
-

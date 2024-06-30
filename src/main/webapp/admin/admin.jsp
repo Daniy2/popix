@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style-admin.css">
+    <script>var contextPath = '<%= request.getContextPath()%>'</script>
+    <script src="../scripts/adminScript.js"></script>
     <script src="https://kit.fontawesome.com/892069e9ac.js" crossorigin="anonymous"></script>
     <title>Popix - Admin</title>
 </head>
@@ -102,8 +104,8 @@
     </table>
 </div>
 
-<button class="btn-add-product">Aggiungi Prodotto</button>
-<button class="btn-add-product">Visualizza ordini</button>
+<button class="btn-add-product" id="addProdBtn">Aggiungi Prodotto</button>
+<button class="btn-add-product" id="viewOrdersBtn">Visualizza ordini</button>
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">

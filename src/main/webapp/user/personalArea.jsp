@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="model.PersonalInfoBean" %>
+<%@ page import="model.ShippingInfoBean" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -17,50 +22,65 @@
     <h4 class="font-weight-bold py-3 mb-4">
         Panoramica account
     </h4>
-    <div class="card overflow-hidden">
-        <div class="row no-gutters row-bordered row-border-light">
-            <div class="col-md-3 pt-0">
-                <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active" data-toggle="list"
-                       href="#account-general">Generali</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list"
-                       href="#orders">Storico ordini</a>    <!--link to panoramica page-->
+    <form action="${pageContext.request.contextPath}/infosServlet" method="post">
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                           href="#account-general">Generali</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                           href="${pageContext.request.contextPath}/getOrderDetailsServlet">Storico ordini</a>    <!--link to panoramica page-->
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-9">
-                <div class="tab-content">
-                    <div class="tab-pane fade active show" id="account-general">
-                        <div class="card-body media align-items-center">
-                            <img src="#" alt
-                                 class="d-block ui-w-80">
-                        </div>
-                        <hr class="border-light m-0">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Nome</label>
-                                <input type="text" class="form-control mb-1" value="">
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body media align-items-center">
+                                <img src="${pageContext.request.contextPath}/images/logo-noborderico.png" alt
+                                     class="d-block ui-w-80">
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Cognome</label>
-                                <input type="text" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Data di nascita</label>
-                                <input type="text" class="form-control mb-1" value="">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Numero di telefono</label>
-                                <input type="text" class="form-control" value="">
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Nome</label>
+                                    <input type="text" class="form-control mb-1" name="name" value="${fn:escapeXml(personalInfo.name)}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Cognome</label>
+                                    <input type="text" class="form-control" name="surname" value="${fn:escapeXml(personalInfo.surname)}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Data di nascita</label>
+                                    <input type="text" class="form-control mb-1" name="birthday" value="${fn:escapeXml(personalInfo.dateOfBirth)}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Numero di telefono</label>
+                                    <input type="text" class="form-control" name="cellphone" value="${fn:escapeXml(personalInfo.cellphoneNumber)}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Paese</label>
+                                    <input type="text" class="form-control" name="country" value="${fn:escapeXml(shippingInfo.country)}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Città</label>
+                                    <input type="text" class="form-control" name="city" value="${fn:escapeXml(shippingInfo.city)}">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Indirizzo</label>
+                                    <input type="text" class="form-control" name="address" value="${fn:escapeXml(shippingInfo.address)}">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="text-right mt-3">
+                <button type="submit" class="btn btn-primary" style="background-color: #333;">Salva</button>&nbsp;
+                <a href="home.jsp" class="btn btn-secondary">Torna alla home</a>
+            </div>
         </div>
-        <div class="text-right mt-3">
-            <button type="button" class="btn btn-primary" style="background-color: #333;">Torna alla home</button>&nbsp;
-        </div>
-    </div>
+    </form>
 </div>
 </body>
 </html>
