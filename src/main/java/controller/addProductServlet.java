@@ -2,6 +2,8 @@ package controller;
 
 import model.ProductBean;
 import model.ProductDao;
+import model.Role;
+import model.UserBean;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,6 +23,11 @@ public class addProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+        UserBean userBean = (UserBean) session.getAttribute("user");
+        if(!userBean.getRole().equals(Role.admin)){
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+        }
         request.setCharacterEncoding("UTF-8");
         String idProduct = request.getParameter("idProduct");
         String name = request.getParameter("name");
@@ -47,10 +54,13 @@ public class addProductServlet extends HttpServlet {
 
         ProductBean productBean = new ProductBean(idProduct,name,cost,description,brand,qty, image,figure);
         ProductDao productDao = new ProductDao();
+        System.out.println(productBean);
+
 
         try{
             productDao.doSave(productBean);
             System.out.println(productBean);
+            response.sendRedirect("../admin/admin.jsp");
         }catch (Exception e){
             throw new RuntimeException(e);
         }

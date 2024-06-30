@@ -21,19 +21,19 @@
 %>
 
 <h2>Aggiungi un prodotto</h2>
-<form class="form-horizontal">
+<form class="form-horizontal" enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="${pageContext.request.contextPath}/addProductServlet">
     <div class="form-row">
         <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" required>
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id" required>
+            <label for="idProduct">ID</label>
+            <input type="text" id="idProduct" name="idProduct" required>
         </div>
         <div class="form-group">
-            <label for="prezzo">Prezzo</label>
-            <input type="number" id="prezzo" name="prezzo" required>
+            <label for="price">Prezzo</label>
+            <input type="number" id="price" name="price" step="0.01" required>
         </div>
     </div>
     <div class="form-row">
@@ -42,24 +42,24 @@
             <input type="text" id="brand" name="brand" required>
         </div>
         <div class="form-group">
-            <label for="personaggio">Personaggio</label>
-            <input type="text" id="personaggio" name="personaggio" required>
+            <label for="figure">Personaggio</label>
+            <input type="text" id="figure" name="figure" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group">
-            <label for="quantita">Quantità</label>
-            <input type="number" id="quantita" name="quantita" required>
+            <label for="qty">Quantità</label>
+            <input type="number" id="qty" name="qty" required>
         </div>
         <div class="form-group">
-            <label for="immagine">Immagine</label>
-            <input type="file" id="immagine" name="immagine" accept="image/*" required>
+            <label for="img_src">Immagine</label>
+            <input type="file" id="img_src" name="img_src" accept="image/*" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group full-width">
-            <label for="descrizione">Descrizione</label>
-            <textarea id="descrizione" name="descrizione" rows="4" required></textarea>
+            <label for="description">Descrizione</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
         </div>
     </div>
     <div class="form-row">
