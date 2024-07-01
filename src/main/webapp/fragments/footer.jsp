@@ -18,9 +18,9 @@
         </div>
         <div class="box">
             <h3>Extra links</h3>
-            <a href="#">My account</a>
+            <a href="${pageContext.request.contextPath}/user/personalArea.jsp">My account</a>
             <a href="#">My order</a>
-            <a href="#">Favourites</a>
+            <a href="products.jsp">Prodotti</a>
         </div>
         <div class="box">
             <h3>Contact info</h3>

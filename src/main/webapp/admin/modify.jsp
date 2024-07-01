@@ -40,7 +40,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="price">Prezzo</label>
-                <input type="number" id="price" name="price" value="<%= request.getParameter("Price")%>" step="0.01" class="form-control" required>
+                <input type="number" id="price" name="price" value="<%= productBean.getPrice()%>" step="0.01" class="form-control" required onblur="alert(document.getElementById('price').value)">
             </div>
         </div>
         <div class="form-row">

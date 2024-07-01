@@ -77,7 +77,7 @@
             </div>
             <div class="text-right mt-3">
                 <button type="submit" class="btn btn-primary" style="background-color: #333;">Salva</button>&nbsp;
-                <a href="home.jsp" class="btn btn-secondary">Torna alla home</a>
+                <a href="${pageContext.request.contextPath}/home.jsp" class="btn btn-secondary">Torna alla home</a>
             </div>
         </div>
     </form>
