@@ -11,25 +11,6 @@ CREATE TABLE User (
     Role ENUM('admin', 'user') NOT NULL
 );
 
--- Creazione della tabella PersonalInfo
-CREATE TABLE PersonalInfo (
-    Customer VARCHAR(100) PRIMARY KEY,
-    Name VARCHAR(100),
-    Surname VARCHAR(100),
-    Date_of_Birth DATE,
-    Cellphone_number VARCHAR(15),
-    FOREIGN KEY (Customer) REFERENCES User(Email) ON DELETE CASCADE
-);
-
--- Creazione della tabella ShippingInfo
-CREATE TABLE ShippingInfo (
-    Customer VARCHAR(100) PRIMARY KEY,
-    Country VARCHAR(100) not null,
-    City VARCHAR(100) not null,
-    Address VARCHAR(255) not null,
-    FOREIGN KEY (Customer) REFERENCES User(Email) ON DELETE CASCADE
-);
-
 -- Creazione della tabella Product
 CREATE TABLE Product (
     IdProduct VARCHAR(5) PRIMARY KEY,
