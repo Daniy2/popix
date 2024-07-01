@@ -49,6 +49,12 @@
     int start = (currentPage - 1) * productsPerPage;
     int end = Math.min(start + productsPerPage, totalProducts);
 
+// Assicura che start non sia superiore a totalProducts
+    start = Math.max(start, 0);
+
+// Assicura che end sia all'interno dei limiti della lista
+    end = Math.min(end, totalProducts);
+
     List<ProductBean> productsForCurrentPage = productBeans.subList(start, end);
 %>
 
@@ -56,7 +62,7 @@
     <aside class="sidebar">
         <form action="${pageContext.request.contextPath}/getProductsServlet" method="GET">
             <select name="category" onchange="this.form.submit()">
-                <option value="">Brand</option>
+                <option value="" selected>Brand</option>
                 <option value="one piece" <%= "one piece".equals(request.getParameter("category")) ? "selected" : "" %>>One piece</option>
                 <option value="dragon ball" <%= "dragon ball".equals(request.getParameter("category")) ? "selected" : "" %>>Dragon Ball</option>
                 <option value="naruto" <%= "naruto".equals(request.getParameter("category")) ? "selected" : "" %>>Naruto</option>
@@ -65,8 +71,8 @@
                 <option value="my hero academia" <%= "my hero academia".equals(request.getParameter("category")) ? "selected" : "" %>>My Hero Academia</option>
             </select>
             <select name="price" id="price-filter" onchange="this.form.submit()">
-                <option value="">Price</option>
-                <option value="low" <%= "low".equals(request.getParameter("price")) ? "selected" : "" %>>Dal più basso al più alto</option>
+                <option value="" selected>Price</option>
+                <option value="low"  <%= "low".equals(request.getParameter("price")) ? "selected" : "" %>>Dal più basso al più alto</option>
                 <option value="high" <%= "high".equals(request.getParameter("price")) ? "selected" : "" %>>Dal più alto al più basso</option>
             </select>
         </form>

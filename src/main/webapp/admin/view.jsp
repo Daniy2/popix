@@ -30,14 +30,14 @@
             <!-- Sidebar di Filtraggio (può essere mantenuto come è) -->
             <div class="sidebar">
                 <h3>Filtra per Data</h3>
-                <form action="#">
+                <form action="${pageContext.request.contextPath}/DateServlet" method="post">
                     <div class="mb-3">
                         <label for="fromDate" class="form-label">Da</label>
-                        <input type="date" class="form-control" id="fromDate" placeholder="Seleziona la data">
+                        <input type="date" class="form-control" id="fromDate" name="fromDate" placeholder="Seleziona la data">
                     </div>
                     <div class="mb-3">
                         <label for="toDate" class="form-label">A</label>
-                        <input type="date" class="form-control" id="toDate" placeholder="Seleziona la data">
+                        <input type="date" class="form-control" id="toDate" name="toDate" placeholder="Seleziona la data">
                     </div>
                     <button type="submit" class="btn btn-primary">Filtra</button>
                 </form>

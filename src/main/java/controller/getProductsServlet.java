@@ -19,26 +19,23 @@ public class getProductsServlet extends HttpServlet {
         // Retrieve filter parameters
         String category = request.getParameter("category");
         String price = request.getParameter("price");
-        //String customPrice = request.getParameter("customPrice");
 
         // Determine the list of products to retrieve based on filters
-        if(category != null && !category.isEmpty()) {
+        if (category != null && !category.isEmpty()) {
             products = productDao.retrieveAllProductsByBrand(category);
-
-        }else if(price != null) {
-            if(price.equals("low")) {
-                products = productDao.retrieveAllProductsByPrice();
-            }else if(price.equals("high")) {
-                products = productDao.retrieveAllProductsByPriceDec();
-            }
-        }else {
+        } else if ("low".equals(price)) {
+            products = productDao.retrieveAllProductsByPrice();
+        } else if ("high".equals(price)) {
+            products = productDao.retrieveAllProductsByPriceDec();
+        } else {
+            // If no filters are applied, retrieve all products
             products = productDao.retrieveAllProducts();
         }
-
 
         request.setAttribute("products", products);
         getServletContext().getRequestDispatcher("/products.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
